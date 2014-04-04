@@ -34,8 +34,21 @@ public interface Quiz extends Remote {
 	void addQuestion();
 
 	/**
-	 * Print the questions in the current quiz
+	 * Get a list of the questions in a quiz
 	 *
+	 * @return a list of Questions
+	 */
+	List<Question> getQuestions();
+
+	/**
+	 * Print the questions in the current quiz
 	 */
 	void printQuestions();
+
+	/**
+	 * Close a quiz
+	 *
+	 * @param id the id of the quiz
+	 */
+	void closeQuiz(int id);
 }

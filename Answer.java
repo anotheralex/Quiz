@@ -2,26 +2,31 @@ package quiz;
 
 /**
  * A data structure for holding a String containing the text of 
- * an answer and a boolean indicating whether the answer is
+ * an answer and an int indicating whether the answer is
  * correct or not
  */
 public interface Answer {
 	
 	/**
-	 * Setter
+	 * Setter for Answer text
 	 */
-	void addAnswer(String text);
+	void setText(String text);
 
 	/**
-	 * Getter for Answer content
+	 * Getter for Answer text
 	 */
-	String getAnswer();
+	String getText();
 
 	/**
-	 * Check is answer is correct
+	 * Check if an answer is correct
 	 *
-	 * @return isCorrect a boolean that is true when the answer is correct
+	 * @return 0 if incorrect and 1 if correct
 	 */
-	boolean isCorrect();
+	int getScore();
+
+	/**
+	 * Specificy whether an answer is correct or not
+	 */
+	void setScore();
 
 }

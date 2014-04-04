@@ -11,16 +11,21 @@ public interface Question {
 	/**
 	 * Return the question ID
 	 *
-	 * @return id the id of the question
+	 * @return the id of the question
 	 */
 	int getId();
 
 	/**
 	 * Return the text of the question
 	 *
-	 * @return content the content of the question
+	 * @return the text of the question
 	 */
-	String getQuestion();
+	String getText();
+
+	/**
+	 * Set the text of a question
+	 */
+	void setText();
 
 	/**
 	 * Add an answer to a question
@@ -33,7 +38,4 @@ public interface Question {
 	 * @return a list of answers
 	 */
 	List<Answer> getAnswers();
-
-
-
 }
