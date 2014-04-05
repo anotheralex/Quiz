@@ -1,4 +1,4 @@
-package quiz;
+//package quiz;
 
 /**
  * A question is a String with a collection of Answers, each of which is 
@@ -27,17 +27,20 @@ public interface Question {
 	/**
 	 * Set the text of a question
 	 */
-	void setText();
+	void setText(String text);
 
 	/**
 	 * Add an answer to a question
+	 *
+	 * @param answer the answer to be added;
+	 * the answer includes a score specifying if it is correct
 	 */
-	void addAnswer();
+	void addAnswer(Answer answer);
 
 	/**
 	 * Return a list of answers for the question
 	 *
-	 * @return a list of answers
+	 * @return a list of all answers associated with this question
 	 */
 	List<Answer> getAnswers();
 }
