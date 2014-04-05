@@ -11,11 +11,6 @@ public interface Player {
 	void getId();
 
 	/**
-	 * Setter for Player name
-	 */
-	void setName(String text);
-
-	/**
 	 * Getter for Player name
 	 */
 	String getName();
