@@ -1,7 +1,8 @@
-package quiz;
+//package quiz;
 
-import java.rmi.Remote;
-import java.rmi.RemoteException;
+//import java.rmi.Remote;
+//import java.rmi.RemoteException;
+import java.util.*;
 
 /**
  * A quiz is a collection of questions, each with multiple answers, only one
@@ -12,7 +13,14 @@ import java.rmi.RemoteException;
  *
  */
 
-public interface Quiz extends Remote {
+public interface Quiz {
+
+	/**
+	 * Set the quiz ID
+	 *
+	 * @param id the id of the quiz
+	 */
+	void setId(int id);
 
 	/**
 	 * Return the quiz ID
@@ -20,6 +28,13 @@ public interface Quiz extends Remote {
 	 * @return id the id of the quiz
 	 */
 	int getId();
+
+	/**
+	 * Set the quiz name
+	 *
+	 * @param name the name of the quiz
+	 */
+	void setName(String name);
 
 	/**
 	 * Return the name of the quiz
@@ -48,5 +63,5 @@ public interface Quiz extends Remote {
 	/**
 	 * Close a quiz
 	 */
-	void clos();
+	void close();
 }
