@@ -30,4 +30,28 @@ public class AnswerImplTest {
 		int actual = a.getScore();
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	public void setTextTest() {
+		Answer b = new AnswerImpl(text, score);
+		String altText = "Alt Text";
+		b.setText(altText);
+
+		String expected = altText;
+		String actual = b.getText();
+
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void setScoreTest() {
+		Answer b = new AnswerImpl(text, score);
+		int altScore = 0;
+		b.setScore(altScore);
+
+		int expected = altScore;
+		int actual = b.getScore();
+
+		assertEquals(expected, actual);
+	}
 }

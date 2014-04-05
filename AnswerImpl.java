@@ -12,6 +12,9 @@ public class AnswerImpl implements Answer {
 
 	/**
 	 * Constructor
+	 *
+	 * @param text the text of the answer
+	 * @param score the score of the answer - 0 or 1
 	 */
 	public AnswerImpl(String text, int score) {
 		this.text = text;
@@ -20,6 +23,8 @@ public class AnswerImpl implements Answer {
 
 	/**
 	 * Setter for Answer text
+	 *
+	 * @param text the text of the question
 	 */
 	public void setText(String text) {
 		this.text = text;
@@ -27,6 +32,8 @@ public class AnswerImpl implements Answer {
 
 	/**
 	 * Getter for Answer text
+	 *
+	 * @return the text of the answer
 	 */
 	public String getText() {
 		return this.text;
@@ -43,6 +50,7 @@ public class AnswerImpl implements Answer {
 
 	/**
 	 * Specificy whether an answer is correct or not
+	 *
 	 * @param score equals 1 for correct and 0 for incorrect
 	 */
 	public void setScore(int score) {
