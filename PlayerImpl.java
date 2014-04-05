@@ -1,17 +1,29 @@
-package quiz;
+//package quiz;
 
 /**
  * A player in the quiz
  */
-public interface Player {
+public class PlayerImpl implements Player {
+
+	private int id;
+	private String name;
+
+	public PlayerImpl(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 
 	/**
 	 * Getter for Player ID
 	 */
-	void getId();
+	public int getId() {
+		return this.id;
+	}
 
 	/**
 	 * Getter for Player name
 	 */
-	String getName();
+	public String getName() {
+		return this.name;
+	}
 }
