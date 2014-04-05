@@ -1,4 +1,4 @@
-package quiz;
+//package quiz;
 
 /**
  * A player in the quiz
