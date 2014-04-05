@@ -2,10 +2,11 @@
 
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.*;
 
-public class QestionImplTest {
+public class QuestionImplTest {
 
-	private question q;
+	private Question q;
 	private int id;
 	private String text;
 	private Answer a;
@@ -43,7 +44,7 @@ public class QestionImplTest {
 		q.setText(altText);
 
 		String expected = altText;
-		String expected = q.getText();
+		String actual = q.getText();
 
 		assertEquals(expected, actual);
 	}
