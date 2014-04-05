@@ -1,4 +1,4 @@
-package quiz;
+//package quiz;
 
 /**
  * A data structure for holding a String containing the text of 
@@ -27,6 +27,6 @@ public interface Answer {
 	/**
 	 * Specificy whether an answer is correct or not
 	 */
-	void setScore();
+	void setScore(int score);
 
 }
