@@ -9,59 +9,99 @@ import java.util.*;
  * of which is correct
  *
  * A quiz has an ID, a name, a list of questions, with answers for each
- * question, and a flag indicating if each answer is correct
+ * question, and a boolean indicating if the quiz is running.
  *
  */
 
-public interface Quiz {
+public class QuizImpl implements Quiz {
+
+	private int id;
+	private String name;
+	private List<Question> questions;
+	private boolean isActive;
+
+	/**
+	 * Constructor
+	 *
+	 * @param id the id for the quiz
+	 * @param name the name of the quiz
+	 */
+	public QuizImpl(int id, String name) {
+		this.id = id;
+		this.name = name;
+		this.questions = new ArrayList<>();
+		this.isActive = false;
+	}
 
 	/**
 	 * Set the quiz ID
 	 *
 	 * @param id the id of the quiz
 	 */
-	void setId(int id);
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	/**
 	 * Return the quiz ID
 	 *
 	 * @return id the id of the quiz
 	 */
-	int getId();
+	public int getId() {
+		return this.id;
+	}
 
 	/**
 	 * Set the quiz name
 	 *
 	 * @param name the name of the quiz
 	 */
-	void setName(String name);
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * Return the name of the quiz
 	 *
 	 * @return name the name of the quiz
 	 */
-	String getName();
+	public String getName() {
+		return this.name;
+	}
 
 	/**
 	 * Add a new question (and associated potential answers) to a quiz
 	 */
-	void addQuestion();
+	public void addQuestion(Question question) {
+		this.questions.add(question);
+	}
 
 	/**
 	 * Get a list of the questions in a quiz
 	 *
 	 * @return a list of Questions
 	 */
-	List<Question> getQuestions();
+	public List<Question> getQuestions() {
+		return this.questions;
+	}
 
 	/**
 	 * Print the questions in the current quiz
 	 */
-	void printQuestions();
+	public void printQuestions() {
+		for (Question q : questions) {
+			System.out.println(q.getText());
+		}
+	}
 
 	/**
 	 * Close a quiz
 	 */
-	void close();
+	public void close() {
+		if (isActive) {
+			isActive = false;
+		} else {
+			System.out.println("Quiz " + id + " is not running.");
+		}
+	}
 }

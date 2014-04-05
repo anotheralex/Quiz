@@ -24,7 +24,6 @@ public class QuizImplTest {
 		assertEquals(expected, actual);
 	}
 
-
 	@Test
 	public void getNameTest() {
 		String expected = name;
@@ -35,10 +34,10 @@ public class QuizImplTest {
 	@Test
 	public void setNameTest() {
 		String altName = "Alt name";
-		z.setText(altName);
+		z.setName(altName);
 
-		String expected = altText;
-		String actual = q.getText();
+		String expected = altName;
+		String actual = z.getName();
 
 		assertEquals(expected, actual);
 	}
