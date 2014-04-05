@@ -47,8 +47,6 @@ public interface Quiz extends Remote {
 
 	/**
 	 * Close a quiz
-	 *
-	 * @param id the id of the quiz
 	 */
-	void closeQuiz(int id);
+	void clos();
 }

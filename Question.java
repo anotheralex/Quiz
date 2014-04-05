@@ -1,9 +1,11 @@
 package quiz;
 
 /**
- * A question is a String with a collection of Answers, each of which is right or wrong
+ * A question is a String with a collection of Answers, each of which is 
+ * right or wrong
  *
- * A question has an ID, content, and a list of answers, only one of which is correct
+ * A question has an ID, content, and a list of answers, only one of which 
+ * is correct
  *
  */
 public interface Question {
