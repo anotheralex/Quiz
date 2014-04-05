@@ -1,4 +1,4 @@
-package quiz;
+//package quiz;
 
 /**
  * A player in the quiz
@@ -8,7 +8,7 @@ public interface Player {
 	/**
 	 * Getter for Player ID
 	 */
-	void getId();
+	int getId();
 
 	/**
 	 * Getter for Player name
