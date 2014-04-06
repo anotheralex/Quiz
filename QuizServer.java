@@ -25,7 +25,6 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	public int addQuiz() throws RemoteException {
 	}
 
-
 	/**
 	 * Start a specified quiz
 	 *
@@ -33,7 +32,6 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 */
 	public void startQuiz(int id) throws RemoteException {
 	}
-
 
 	/**
 	 * Closes a specified quiz
