@@ -8,7 +8,10 @@ import java.rmi.UnicastRemoteObject;
  *
  * Uses RMI to allow clients to create, play and close quizzes
  */
-public class QuizServer extends UnicastRemoteObject {
+public class QuizServer extends UnicastRemoteObject implements QuizService {
+
+	private List<Quiz> quizzes;
+	private List<Player> players;
 
 	public QuizServer() throws RemoteException() {
 		// nothing to put here now
@@ -19,7 +22,7 @@ public class QuizServer extends UnicastRemoteObject {
 	 *
 	 * @return the id of the new quiz
 	 */
-	public int createQuiz() throws RemoteException {
+	public int addQuiz() throws RemoteException {
 	}
 
 
@@ -42,4 +45,25 @@ public class QuizServer extends UnicastRemoteObject {
 	public void closeQuiz(int id) throws RemoteException  {
 	}
 
+	/**
+	 * Logs quiz play details noting quiz id, player id
+	 */
+	private void writeLog() {
+	}
+
+	/**
+	 * Add a new player
+	 *
+	 * @param name the name of the new player
+	 *
+	 * @return the id of the new player
+	 */
+	public int addPlayer(String name) {
+	}
+
+	/**
+	 * List all available quizzes
+	 */
+	public void listQuizzes() {
+	}
 }

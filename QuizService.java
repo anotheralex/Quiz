@@ -13,7 +13,7 @@ public interface QuizService extends Remote {
 	 *
 	 * @return the id of the new quiz
 	 */
-	int createQuiz() throws RemoteException;
+	int addQuiz() throws RemoteException;
 
 	/**
 	 * Start a specified quiz
@@ -30,4 +30,19 @@ public interface QuizService extends Remote {
 	 * @param id the id of the quiz to close
 	 */
 	void closeQuiz(int id) throws RemoteException;
+
+	/**
+	 * Add a new player
+	 *
+	 * @param name the name of the new player
+	 *
+	 * @return the id of the new player
+	 */
+	int addPlayer(String name) throws RemoteException;
+
+	/**
+	 * List all available quizzes
+	 */
+	void listQuizzes() throws RemoteException;
+
 }
