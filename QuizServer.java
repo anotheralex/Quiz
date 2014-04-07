@@ -2,7 +2,6 @@
 
 import java.rmi.RemoteException;
 import java.rmi.UnicastRemoteObject;
-import java.lang.StringBuilder;
 
 /**
  * A quiz server that serves the QuizService service to remote clients
@@ -11,11 +10,17 @@ import java.lang.StringBuilder;
  */
 public class QuizServer extends UnicastRemoteObject implements QuizService {
 
+	private int quizId;
 	private List<Quiz> quizzes;
+	
+	private int playerId:
 	private List<Player> players;
 
 	public QuizServer() throws RemoteException() {
-		// nothing to put here now
+		// next ID for quizzes and players
+		// both start at 1
+		quizId = 1;
+		playerId = 1;
 	}
 
 	/**
@@ -58,6 +63,22 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 * @return the id of the new player
 	 */
 	public int addPlayer(String name) {
+		if (name == null) {
+			throw new NullPointerException();
+		} else {
+			Player newPlayer = new Player(playerId, name);
+			players.add(newPlayer);
+			playerId++;
+
+			// confirm new player details
+			StringBuilder sb = new StringBuilder();
+			sb.append("Added ");
+			sb.append(newPlayer.getName());
+			sb.append(" (");
+			sb.append(newPlayer.getId());
+			sb.append(")");
+			System.out.println(sb.toString());
+		}
 	}
 
 	/**
