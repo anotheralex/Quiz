@@ -78,6 +78,8 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 			sb.append(newPlayer.getId());
 			sb.append(")");
 			System.out.println(sb.toString());
+
+			return newPlayer.getId();
 		}
 	}
 
