@@ -66,7 +66,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		if (name == null) {
 			throw new NullPointerException();
 		} else {
-			Player newPlayer = new Player(playerId, name);
+			Player newPlayer = new PlayerImpl(playerId, name);
 			players.add(newPlayer);
 			playerId++;
 
