@@ -45,4 +45,18 @@ public interface QuizService extends Remote {
 	 */
 	void listQuizzes() throws RemoteException;
 
+	/**
+	 * Get a list of all players
+	 *
+	 * @return players a List<Player> of players
+	 */
+	List<Player> getPlayers();
+
+	/**
+	 * Get a list of all quizzes
+	 *
+	 * @return players a List<Quiz> of players
+	 */
+	List<Quiz> getQuizzes();
+
 }

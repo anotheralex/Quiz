@@ -101,4 +101,22 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 			}
 		}
 	}
+
+	/**
+	 * Get a list of all players
+	 *
+	 * @return a List<Player> of players
+	 */
+	public List<Player> getPlayers() {
+		return this.players;
+	}
+
+	/**
+	 * Get a list of all quizzes
+	 *
+	 * @return a List<Quiz> of quizzes
+	 */
+	public List<Quiz> getQuizzes() {
+		return this.quizzes;
+	}
 }
