@@ -18,7 +18,7 @@ public class QuizSetClientImpl implements QuizSetupClient {
 	 *
 	 * @return a handle to the service
 	 */
-	public QuizService connect() {
+	public QuizService connect() throws NotBoundException, RemoteException, MalformedURLException {
 		URL = "127.0.0.1:1099/quizserver";
 		Remote service = Naming.lookup(URL);
 		QuizService quizService = (QuizService) service;
