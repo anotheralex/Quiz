@@ -22,14 +22,14 @@ public interface QuizSetupClient {
 	 *
 	 * @return the ID the player
 	 */
-	int addPlayer();
+	void addPlayer();
 	
 	/**
 	 * Add a new quiz
 	 *
 	 * @return the IF of the quiz
 	 */
-	int addQuiz();
+	void addQuiz();
 
 	/**
 	 * Show the details of a specified player
