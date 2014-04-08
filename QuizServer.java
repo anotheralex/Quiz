@@ -1,7 +1,8 @@
 //package quiz
 
 import java.rmi.RemoteException;
-import java.rmi.UnicastRemoteObject;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 /**
  * A quiz server that serves the QuizService service to remote clients
@@ -10,13 +11,17 @@ import java.rmi.UnicastRemoteObject;
  */
 public class QuizServer extends UnicastRemoteObject implements QuizService {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int quizId;
 	private List<Quiz> quizzes;
 	
-	private int playerId:
+	private int playerId;
 	private List<Player> players;
 
-	public QuizServer() throws RemoteException() {
+	public QuizServer() throws RemoteException {
 		// next ID for quizzes and players
 		// both start at 1
 		quizId = 1;
@@ -25,10 +30,8 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 
 	/**
 	 * Creates a new quiz
-	 *
-	 * @return the id of the new quiz
 	 */
-	public int addQuiz() throws RemoteException {
+	public void addQuiz() throws RemoteException {
 	}
 
 	/**
@@ -47,12 +50,6 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 * @param id the id of the quiz to close
 	 */
 	public void closeQuiz(int id) throws RemoteException  {
-	}
-
-	/**
-	 * Logs quiz play details noting quiz id, player id
-	 */
-	private void writeLog() {
 	}
 
 	/**

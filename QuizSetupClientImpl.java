@@ -1,10 +1,10 @@
 // package quiz;
 
+import java.net.MalformedURLException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
-import java.rmi.MalformedURLException;
 
 /**
  * A client for setting up new quizzes
@@ -19,7 +19,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 * @return a handle to the service
 	 */
 	public void connect() throws NotBoundException, RemoteException, MalformedURLException {
-		URL = "127.0.0.1:1099/quizserver";
+		String URL = "127.0.0.1:1099/quizserver";
 		Remote service = Naming.lookup(URL);
 		this.quizService = (QuizService) service;
 	}
@@ -27,7 +27,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	/**
 	 * Display a menu with user options
 	 */
-	private static void showMenu() {
+	public void showMenu() {
 		System.out.println("QUIZ SETUP CLIENT MAIN MENU");
 		System.out.println("");
 		System.out.println("Select one of the following options:");
@@ -43,11 +43,11 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	/**
 	 * Take input from main menu and select appropriate method to run
 	 */
-	private static void switcher() {
+	private void switcher() {
 		while (true) {
 			showMenu();
 		
-			int choice;
+			int choice = 0;
 			try {
 				choice = Integer.parseInt(System.console().readLine());
 			} catch (NumberFormatException ex) {
@@ -61,7 +61,12 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			switch (choice) {
 				case 1:
 					String name = getPlayerDetails();
+				try {
 					this.quizService.addPlayer(name);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 					break;
 				case 2:
 					break;
@@ -85,7 +90,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 *
 	 * @return the name of the player
 	 */
-	public static String getPlayerDetails() {
+	public String getPlayerDetails() {
 		String name;
 		do {
 			System.out.print("Enter player name: ");
@@ -98,7 +103,8 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	/**
 	 * Add a new quiz
 	 */
-	public void addQuiz();
+	public void addQuiz() {
+	}
 
 	/**
 	 * Add a new question
@@ -113,7 +119,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 * 
 	 * Private method to be used by addQuestion()
 	 */
-	private void addQuestion() {
+	private void addAnswer() {
 	}
 
 	/**
@@ -121,15 +127,16 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 *
 	 * @param id the ID of the player
 	 */
-	void showPlayer(int id);
+	public void showPlayer(int id) {
+	}
 	
 	/**
 	 * Show a list of all players
 	 */
-	public static void showPlayers() {
+	public void showPlayers() {
 		System.out.println("All players");
 		System.out.println("ID\tName");
-		for (Player p : this.quizServer.getPlayers()) {
+		for (Player p : this.quizService.getPlayers()) {
 			StringBuilder sb = new StringBuilder();
 			sb.append(p.getId());
 			sb.append("\t");
@@ -143,15 +150,16 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 *
 	 * @param id the ID of the quiz
 	 */
-	void showQuiz(int id);
+	public void showQuiz(int id) {
+	}
 	
 	/**
 	 * Show a list of all quizzes
 	 */
-	public static void showQuizzes() {
+	public void showQuizzes() {
 		System.out.println("All quizzes");
 		System.out.println("ID\tName");
-		for (Quiz q : this.quizServer.getQuizzes()) {
+		for (Quiz q : this.quizService.getQuizzes()) {
 			StringBuilder sb = new StringBuilder();
 			sb.append(q.getId());
 			sb.append("\t");

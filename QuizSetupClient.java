@@ -1,3 +1,7 @@
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
 // package quiz;
 
 /**
@@ -9,8 +13,11 @@ public interface QuizSetupClient {
 	 * Set up a connection to the remote server
 	 *
 	 * @return a handle to the service
+	 * @throws MalformedURLException 
+	 * @throws RemoteException 
+	 * @throws NotBoundException 
 	 */
-	void connect();
+	void connect() throws NotBoundException, RemoteException, MalformedURLException;
 
 	//TODO Should this be a private method?
 	/**

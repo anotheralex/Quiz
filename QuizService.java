@@ -2,6 +2,7 @@
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  * Functionality to be offered by the quiz server
@@ -13,7 +14,7 @@ public interface QuizService extends Remote {
 	 *
 	 * @return the id of the new quiz
 	 */
-	int addQuiz() throws RemoteException;
+	void addQuiz() throws RemoteException;
 
 	/**
 	 * Start a specified quiz
