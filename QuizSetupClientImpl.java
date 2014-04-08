@@ -147,5 +147,15 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	/**
 	 * Show a list of all quizzes
 	 */
-	void showQuizzes();
+	public static void showQuizzes() {
+		System.out.println("All quizzes");
+		System.out.println("ID\tName");
+		for (Quiz q : this.quizServer.getQuizzes()) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(q.getId());
+			sb.append("\t");
+			sb.append(q.getName());
+			System.out.println(sb.toString());
+		}
+	}
 }
