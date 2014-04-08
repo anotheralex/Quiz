@@ -12,6 +12,7 @@ public interface QuizSetupClient {
 	 */
 	QuizService connect();
 
+	//TODO Should this be a private method?
 	/**
 	 * Display a menu with user options
 	 */
