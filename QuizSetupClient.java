@@ -10,7 +10,7 @@ public interface QuizSetupClient {
 	 *
 	 * @return a handle to the service
 	 */
-	QuizService connect();
+	void connect();
 
 	//TODO Should this be a private method?
 	/**
