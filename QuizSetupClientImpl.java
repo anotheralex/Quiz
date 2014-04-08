@@ -69,6 +69,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 					showPlayers();
 					break;
 				case 4:
+					showQuizzes();
 					break;
 				case 5:
 					break;
