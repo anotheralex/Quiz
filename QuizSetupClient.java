@@ -19,12 +19,12 @@ public interface QuizSetupClient {
 	void showMenu();
 
 	/**
-	 * Add a new player
+	 * Get the details of a player to add
 	 *
 	 * @return the ID the player
 	 */
-	void addPlayer();
-	
+	String getPlayerDetails();	
+
 	/**
 	 * Add a new quiz
 	 *
