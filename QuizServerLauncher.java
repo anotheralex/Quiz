@@ -12,19 +12,26 @@ public class QuizServerLauncher {
 	}
 
 	private void launch() {
-		//1. If there is no security manager, start one
+		/*
+		 * Check if there is a  security manager running
+		 * If there is not, start one
+		 */
 		if (System.getSecurityManager() == null) {
 			System.setSecurityManager(new RMISecurityManager());
 		}
 		try {
-			// 2. Create the registry if there is not one
+			/*
+			 * Register the service with the registry
+			 * For this assignment the registry is assumed to be on
+			 * the same machine as the client and the server
+			 */
 			LocateRegistry.createRegistry(1099);
-			// 3. Create the server object
+			
 			QuizService service = new QuizServer();
-			// 4. Register (bind) the server object on the registry
-			// The registry may be on a different machine
+
 			String registryHost = "//localhost/";
 			String serviceName = "quizserver";
+			
 			Naming.rebind(registryHost + serviceName, service);
 		} catch (MalformedURLException ex) {
 			ex.printStackTrace();
