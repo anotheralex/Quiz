@@ -9,6 +9,7 @@ public class QuizServerLauncher {
 	public static void main(String[] args) {
 		QuizServerLauncher app = new QuizServerLauncher();
 		app.launch();
+		System.out.println("Setting up the Quiz Service...");
 	}
 
 	private void launch() {
