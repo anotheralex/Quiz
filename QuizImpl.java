@@ -13,7 +13,7 @@ import java.util.List;
 public class QuizImpl implements Quiz {
 
 	private int id;
-	private String name;
+	private String title;
 	private List<Question> questions;
 	private boolean isActive;
 
@@ -25,7 +25,7 @@ public class QuizImpl implements Quiz {
 	 */
 	public QuizImpl(int id, String name) {
 		this.id = id;
-		this.name = name;
+		this.title = name;
 		this.questions = new ArrayList<>();
 		this.isActive = false;
 	}
@@ -53,8 +53,8 @@ public class QuizImpl implements Quiz {
 	 *
 	 * @param name the name of the quiz
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String title) {
+		this.title = title;
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class QuizImpl implements Quiz {
 	 * @return name the name of the quiz
 	 */
 	public String getName() {
-		return this.name;
+		return this.title;
 	}
 
 	/**
