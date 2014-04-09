@@ -1,8 +1,5 @@
-//package quiz;
-
-//import java.rmi.Remote;
-//import java.rmi.RemoteException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A quiz is a collection of questions, each with multiple answers, only one
