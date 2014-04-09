@@ -64,4 +64,12 @@ public interface QuizSetupClient {
 	 * @throws RemoteException 
 	 */
 	void showQuizzes() throws RemoteException;
+
+	/**
+	 * Launcher for main client interaction
+	 * @throws RemoteException 
+	 * @throws NotBoundException 
+	 * @throws MalformedURLException 
+	 */
+	void launch() throws RemoteException, MalformedURLException, NotBoundException;
 }

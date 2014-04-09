@@ -2,6 +2,7 @@
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +27,10 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		// both start at 1
 		quizId = 1;
 		playerId = 1;
+		
+		quizzes = new ArrayList<>();
+		players = new ArrayList<>();
+
 	}
 
 	/**
@@ -59,13 +64,15 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 *
 	 * @return the id of the new player
 	 */
-	public int addPlayer(String name) {
+	public void addPlayer(String name) {
+		System.out.println("Inside addPlayer()...");
+		
 		if (name == null) {
 			throw new NullPointerException();
 		} else {
-			Player newPlayer = new PlayerImpl(playerId, name);
-			players.add(newPlayer);
-			playerId++;
+			Player newPlayer = new PlayerImpl(this.playerId, name);
+			this.players.add(newPlayer);
+			this.playerId++;
 
 			// confirm new player details
 			StringBuilder sb = new StringBuilder();
@@ -75,8 +82,6 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 			sb.append(newPlayer.getId());
 			sb.append(")");
 			System.out.println(sb.toString());
-
-			return newPlayer.getId();
 		}
 	}
 

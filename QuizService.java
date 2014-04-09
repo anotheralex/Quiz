@@ -39,7 +39,7 @@ public interface QuizService extends Remote {
 	 *
 	 * @return the id of the new player
 	 */
-	int addPlayer(String name) throws RemoteException;
+	void addPlayer(String name) throws RemoteException;
 
 	/**
 	 * List all available quizzes

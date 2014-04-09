@@ -13,9 +13,21 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 
 	private QuizService quizService;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MalformedURLException, NotBoundException {
 		QuizSetupClient qs = new QuizSetupClientImpl();
-		qs.showMenu();
+		try {
+			qs.launch();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void launch() throws RemoteException, MalformedURLException, NotBoundException {
+		System.out.println("Connecting to server...");
+		this.connect();
+		System.out.println("Connected to server.");
+		this.switcher();
 	}
 		
 	/**
@@ -24,7 +36,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 * @return a handle to the service
 	 */
 	public void connect() throws NotBoundException, RemoteException, MalformedURLException {
-		String URL = "127.0.0.1:1099/quizservice";
+		String URL = "//localhost/quizservice";
 		Remote service = Naming.lookup(URL);
 		this.quizService = (QuizService) service;
 	}
@@ -66,13 +78,14 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			 */
 			switch (choice) {
 				case 1:
-					String name = getPlayerDetails();
-				try {
-					this.quizService.addPlayer(name);
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					try {
+						String name = this.getPlayerDetails();
+						System.out.println("Adding player...");
+						this.quizService.addPlayer(name);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					break;
 				case 2:
 					break;
