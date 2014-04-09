@@ -48,7 +48,7 @@ public interface Quiz {
 	 *
 	 * @param question the question to add
 	 */
-	void addQuestion(Question question);
+	void addQuestions();
 
 	/**
 	 * Get a list of the questions in a quiz

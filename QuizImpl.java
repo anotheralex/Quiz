@@ -15,19 +15,21 @@ public class QuizImpl implements Quiz {
 	private int id;
 	private String title;
 	private List<Question> questions;
+	private int questionId;
 	private boolean isActive;
 
 	/**
 	 * Constructor
 	 *
 	 * @param id the id for the quiz
-	 * @param title the name of the quiz
+	 * @param title the title of the quiz
 	 */
 	public QuizImpl(int id, String title) {
 		this.id = id;
 		this.title = title;
 		this.questions = new ArrayList<>();
 		this.isActive = false;
+		this.questionId = 0;
 	}
 
 	/**
@@ -69,8 +71,18 @@ public class QuizImpl implements Quiz {
 	/**
 	 * Add a new question (and associated potential answers) to a quiz
 	 */
-	public void addQuestion(Question question) {
-		this.questions.add(question);
+	public void addQuestions() {
+		boolean addQuestion = true;
+		String text;
+		Question q;
+		
+		while (addQuestion) {
+			System.out.print("Enter question: ");
+			text = System.console().readLine();
+			questionId++;
+			q = new QuestionImpl(questionId, text);
+			this.questions.add(q);
+		}
 	}
 
 	/**
