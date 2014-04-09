@@ -65,8 +65,6 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 * @return the id of the new player
 	 */
 	public void addPlayer(String name) {
-		System.out.println("Inside addPlayer()...");
-		
 		if (name == null) {
 			throw new NullPointerException();
 		} else {
@@ -76,9 +74,9 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 
 			// confirm new player details
 			StringBuilder sb = new StringBuilder();
-			sb.append("Added ");
+			sb.append("Added new player: ");
 			sb.append(newPlayer.getName());
-			sb.append(" (");
+			sb.append(" (ID: ");
 			sb.append(newPlayer.getId());
 			sb.append(")");
 			System.out.println(sb.toString());

@@ -80,8 +80,9 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 				case 1:
 					try {
 						String name = this.getPlayerDetails();
-						System.out.println("Adding player...");
 						this.quizService.addPlayer(name);
+						System.out.println("Player added.");
+						System.out.println("");
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -90,7 +91,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 				case 2:
 					break;
 				case 3:
-					showPlayers();
+					this.showPlayers();
 					break;
 				case 4:
 					showQuizzes();
@@ -98,7 +99,8 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 				case 5:
 					break;
 				default:
-					System.out.println("Invalid option.");
+					System.out.println("Invalid option. PLease try again.");
+					System.out.println("");
 					showMenu();
 			}
 		}
@@ -154,14 +156,20 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 * @throws RemoteException 
 	 */
 	public void showPlayers() throws RemoteException {
-		System.out.println("All players");
-		System.out.println("ID\tName");
-		for (Player p : this.quizService.getPlayers()) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(p.getId());
-			sb.append("\t");
-			sb.append(p.getName());
-			System.out.println(sb.toString());
+		if (this.quizService.getPlayers().isEmpty()) {
+			System.out.println("No players added.");
+		} else {
+			System.out.println("");
+			System.out.println("All players");
+			System.out.println("ID\tName");
+			for (Player p : this.quizService.getPlayers()) {
+				StringBuilder sb = new StringBuilder();
+				sb.append(p.getId());
+				sb.append("\t");
+				sb.append(p.getName());
+				System.out.println(sb.toString());
+			}
+			System.out.println("");
 		}
 	}
 

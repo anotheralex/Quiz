@@ -1,10 +1,13 @@
+import java.io.Serializable;
+
 //package quiz;
 
 /**
  * A player in the quiz
  */
-public class PlayerImpl implements Player {
+public class PlayerImpl implements Player, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 
