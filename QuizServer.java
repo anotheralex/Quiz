@@ -64,7 +64,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 *
 	 * @return the id of the new player
 	 */
-	public void addPlayer(String name) {
+	public synchronized void addPlayer(String name) {
 		if (name == null) {
 			throw new NullPointerException();
 		} else {
