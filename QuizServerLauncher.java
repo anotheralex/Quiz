@@ -31,7 +31,7 @@ public class QuizServerLauncher {
 			QuizService service = new QuizServer();
 
 			String registryHost = "//localhost/";
-			String serviceName = "quizserver";
+			String serviceName = "quizservice";
 			
 			Naming.rebind(registryHost + serviceName, service);
 		} catch (MalformedURLException ex) {

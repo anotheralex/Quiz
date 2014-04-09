@@ -13,13 +13,18 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 
 	private QuizService quizService;
 
+	public static void main(String[] args) {
+		QuizSetupClient qs = new QuizSetupClientImpl();
+		qs.showMenu();
+	}
+		
 	/**
 	 * Set up a connection to the remote server
 	 *
 	 * @return a handle to the service
 	 */
 	public void connect() throws NotBoundException, RemoteException, MalformedURLException {
-		String URL = "127.0.0.1:1099/quizserver";
+		String URL = "127.0.0.1:1099/quizservice";
 		Remote service = Naming.lookup(URL);
 		this.quizService = (QuizService) service;
 	}
@@ -31,19 +36,20 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 		System.out.println("QUIZ SETUP CLIENT MAIN MENU");
 		System.out.println("");
 		System.out.println("Select one of the following options:");
-		System.out.println("[1] Add new player");
-		System.out.println("[2] Add new quiz");
-		System.out.println("[3] Show current players");
-		System.out.println("[4] Show current quizzes");
-		System.out.println("[5] Quit");
+		System.out.println("1. Add new player");
+		System.out.println("2. Add new quiz");
+		System.out.println("3. Show current players");
+		System.out.println("4. Show current quizzes");
+		System.out.println("5. Quit");
 		System.out.println("");
 		System.out.print("Option (1-5): ");
 	}
 
 	/**
 	 * Take input from main menu and select appropriate method to run
+	 * @throws RemoteException 
 	 */
-	private void switcher() {
+	private void switcher() throws RemoteException {
 		while (true) {
 			showMenu();
 		
@@ -132,8 +138,9 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	
 	/**
 	 * Show a list of all players
+	 * @throws RemoteException 
 	 */
-	public void showPlayers() {
+	public void showPlayers() throws RemoteException {
 		System.out.println("All players");
 		System.out.println("ID\tName");
 		for (Player p : this.quizService.getPlayers()) {
@@ -155,8 +162,9 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	
 	/**
 	 * Show a list of all quizzes
+	 * @throws RemoteException 
 	 */
-	public void showQuizzes() {
+	public void showQuizzes() throws RemoteException {
 		System.out.println("All quizzes");
 		System.out.println("ID\tName");
 		for (Quiz q : this.quizService.getQuizzes()) {

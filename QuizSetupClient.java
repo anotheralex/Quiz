@@ -48,8 +48,9 @@ public interface QuizSetupClient {
 	
 	/**
 	 * Show a list of all players
+	 * @throws RemoteException 
 	 */
-	void showPlayers();
+	void showPlayers() throws RemoteException;
 
 	/**
 	 * Show the details of a specified quiz
@@ -60,6 +61,7 @@ public interface QuizSetupClient {
 	
 	/**
 	 * Show a list of all quizzes
+	 * @throws RemoteException 
 	 */
-	void showQuizzes();
+	void showQuizzes() throws RemoteException;
 }
