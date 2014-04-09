@@ -193,7 +193,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			StringBuilder sb = new StringBuilder();
 			sb.append(q.getId());
 			sb.append("\t");
-			sb.append(q.getName());
+			sb.append(q.getTitle());
 			System.out.println(sb.toString());
 		}
 	}

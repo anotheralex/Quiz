@@ -8,13 +8,13 @@ public class QuizImplTest {
 
 	private Quiz z;
 	private int id;
-	private String name;
+	private String title;
 
 	@Before
 	public void setup() {
 		id = 0;
-		name = "Test";
-		z = new QuizImpl(id, name);
+		title = "Test";
+		z = new QuizImpl(id, title);
 	}
 
 	@Test
@@ -25,19 +25,19 @@ public class QuizImplTest {
 	}
 
 	@Test
-	public void getNameTest() {
-		String expected = name;
-		String actual = z.getName();
+	public void getTitleTest() {
+		String expected = title;
+		String actual = z.getTitle();
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void setNameTest() {
-		String altName = "Alt name";
-		z.setName(altName);
+		String altTitle = "Alt name";
+		z.setTitle(altTitle);
 
-		String expected = altName;
-		String actual = z.getName();
+		String expected = altTitle;
+		String actual = z.getTitle();
 
 		assertEquals(expected, actual);
 	}

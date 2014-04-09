@@ -34,14 +34,14 @@ public interface Quiz {
 	 *
 	 * @param name the name of the quiz
 	 */
-	void setName(String name);
+	void setTitle(String title);
 
 	/**
 	 * Return the name of the quiz
 	 *
 	 * @return name the name of the quiz
 	 */
-	String getName();
+	String getTitle();
 
 	/**
 	 * Add a new question (and associated potential answers) to a quiz

@@ -21,11 +21,11 @@ public class QuizImpl implements Quiz {
 	 * Constructor
 	 *
 	 * @param id the id for the quiz
-	 * @param name the name of the quiz
+	 * @param title the name of the quiz
 	 */
-	public QuizImpl(int id, String name) {
+	public QuizImpl(int id, String title) {
 		this.id = id;
-		this.title = name;
+		this.title = title;
 		this.questions = new ArrayList<>();
 		this.isActive = false;
 	}
@@ -53,7 +53,7 @@ public class QuizImpl implements Quiz {
 	 *
 	 * @param name the name of the quiz
 	 */
-	public void setName(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
@@ -100,5 +100,9 @@ public class QuizImpl implements Quiz {
 		} else {
 			System.out.println("Quiz " + id + " is not running.");
 		}
+	}
+
+	public String getTitle() {
+		return this.title;
 	}
 }
