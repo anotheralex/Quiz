@@ -62,7 +62,8 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 * @throws RemoteException 
 	 */
 	private void switcher() throws RemoteException {
-		while (true) {
+		boolean run = true;
+		while (run) {
 			showMenu();
 		
 			int choice = 0;
@@ -97,11 +98,11 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 					showQuizzes();
 					break;
 				case 5:
+					run = false;
 					break;
 				default:
 					System.out.println("Invalid option. PLease try again.");
 					System.out.println("");
-					showMenu();
 			}
 		}
 	}
