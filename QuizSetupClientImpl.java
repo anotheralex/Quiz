@@ -91,7 +91,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 					break;
 				case 2:
 					try {
-						String title = this.getPlayerDetails();
+						String title = this.getQuizDetails();
 						this.quizService.addQuiz(title);
 						System.out.println("Quiz added.");
 						System.out.println("");
