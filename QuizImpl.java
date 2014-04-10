@@ -33,6 +33,21 @@ public class QuizImpl implements Quiz {
 	}
 
 	/**
+	 * Main for testing purposes
+	 */
+	public static void main(String[] args) {
+		System.out.println("Testing basic functions...");
+		Quiz q = new QuizImpl(1, "Test quiz");
+		System.out.println("Quiz ID: " + q.getId());
+		System.out.println("Quiz name: " + q.getTitle());
+		System.out.println("Adding questions...");
+		q.addQuestions();
+		System.out.println("Printing questions...");
+		q.printQuestions();
+	}
+	
+	
+	/**
 	 * Set the quiz ID
 	 *
 	 * @param id the id of the quiz
@@ -64,7 +79,7 @@ public class QuizImpl implements Quiz {
 	 *
 	 * @return name the name of the quiz
 	 */
-	public String getName() {
+	public String getTitle() {
 		return this.title;
 	}
 
@@ -85,12 +100,12 @@ public class QuizImpl implements Quiz {
 			this.questions.add(q);
 
 			System.out.println("");
-			System.out.println("Add another (y/n)? ");
+			System.out.print("Hit Return to continue or q to quit: ");
 			promptResponse = System.console().readLine();
-			if (promptResponse.equals("n") ||
-					promptResponse.equals("no") ||
-					promptResponse.equals("N") ||
-					promptResponse.equals("No")) {
+			if (promptResponse.equals("q") ||
+					promptResponse.equals("Q") ||
+					promptResponse.equals("quit") ||
+					promptResponse.equals("Quit")) {
 				addNewQuestion = false;
 			}
 		}
@@ -123,9 +138,5 @@ public class QuizImpl implements Quiz {
 		} else {
 			System.out.println("Quiz " + id + " is not running.");
 		}
-	}
-
-	public String getTitle() {
-		return this.title;
 	}
 }
