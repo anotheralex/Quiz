@@ -14,7 +14,7 @@ public class AnswerImplTest {
 		text = "Test";
 		score = 1;
 
-		a = new AnswerImpl(text, score);
+		a = new AnswerImpl(1, text, score);
 	}
 
 	@Test
@@ -33,7 +33,7 @@ public class AnswerImplTest {
 
 	@Test
 	public void setTextTest() {
-		Answer b = new AnswerImpl(text, score);
+		Answer b = new AnswerImpl(1, text, score);
 		String altText = "Alt Text";
 		b.setText(altText);
 
@@ -45,7 +45,7 @@ public class AnswerImplTest {
 	
 	@Test
 	public void setScoreTest() {
-		Answer b = new AnswerImpl(text, score);
+		Answer b = new AnswerImpl(1, text, score);
 		int altScore = 0;
 		b.setScore(altScore);
 
