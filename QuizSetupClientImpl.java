@@ -90,6 +90,16 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 					}
 					break;
 				case 2:
+					try {
+						String title = this.getPlayerDetails();
+						this.quizService.addQuiz(title);
+						System.out.println("Quiz added.");
+						System.out.println("");
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 					break;
 				case 3:
 					this.showPlayers();
@@ -108,7 +118,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	}
 
 	/**
-	 * Add a new player
+	 * Get the name of a new player
 	 *
 	 * @return the name of the player
 	 */
@@ -121,6 +131,22 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 
 		return name;
 	}
+
+	/**
+	 * Get the name of a new player
+	 *
+	 * @return the name of the player
+	 */
+	public String getQuizDetails() {
+		String title;
+		do {
+			System.out.print("Enter quiz title: ");
+			title = System.console().readLine();
+		} while (title.equals(""));
+
+		return title;
+	}
+
 	
 	/**
 	 * Add a new quiz

@@ -14,7 +14,7 @@ public interface QuizService extends Remote {
 	 *
 	 * @return the id of the new quiz
 	 */
-	void addQuiz() throws RemoteException;
+	void addQuiz(String title) throws RemoteException;
 
 	/**
 	 * Start a specified quiz

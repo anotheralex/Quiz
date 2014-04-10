@@ -36,7 +36,19 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	/**
 	 * Creates a new quiz
 	 */
-	public void addQuiz() throws RemoteException {
+	public synchronized void addQuiz(String title) throws RemoteException {
+		Quiz newQuiz = new QuizImpl(this.quizId, title);
+		this.quizzes.add(newQuiz);
+		this.quizId++;
+
+		// confirm new quiz details
+		StringBuilder sb = new StringBuilder();
+		sb.append("Added new quiz: ");
+		sb.append(newQuiz.getTitle());
+		sb.append(" (ID: ");
+		sb.append(newQuiz.getId());
+		sb.append(")");
+		System.out.println(sb.toString());
 	}
 
 	/**

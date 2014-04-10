@@ -28,9 +28,16 @@ public interface QuizSetupClient {
 	/**
 	 * Get the details of a player to add
 	 *
-	 * @return the ID the player
+	 * @return the name the player
 	 */
 	String getPlayerDetails();	
+
+	/**
+	 * Get the details of a quiz to add
+	 *
+	 * @return the title the player
+	 */
+	String getQuizDetails();	
 
 	/**
 	 * Add a new quiz
