@@ -73,28 +73,20 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	}
 
 	/**
-	 * Add a new player
+	 * Add a new player and add it to the list of players
 	 *
 	 * @param name the name of the new player
 	 *
-	 * @return the id of the new player
+	 * @return the new Player object
 	 */
-	public synchronized void addPlayer(String name) {
+	public synchronized Player addPlayer(String name) {
 		if (name == null) {
 			throw new NullPointerException();
 		} else {
 			Player newPlayer = new PlayerImpl(this.playerId, name);
 			this.players.add(newPlayer);
 			this.playerId++;
-
-			// confirm new player details
-			StringBuilder sb = new StringBuilder();
-			sb.append("Added new player: ");
-			sb.append(newPlayer.getName());
-			sb.append(" (ID: ");
-			sb.append(newPlayer.getId());
-			sb.append(")");
-			System.out.println(sb.toString());
+			return newPlayer;
 		}
 	}
 
@@ -136,7 +128,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	}
 	
 	/**
-	 * Print a message to the console
+	 * Print a status message to the console
 	 */
 	public void printMessage(String message) {
 		System.out.println(message);

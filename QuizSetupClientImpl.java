@@ -81,9 +81,10 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 				case 1:
 					try {
 						String name = this.getPlayerDetails();
-						this.quizService.addPlayer(name);
+						Player newPlayer = this.quizService.addPlayer(name);
 						System.out.println("Player added.");
 						System.out.println("");
+						quizService.printMessage("Player added.");
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
