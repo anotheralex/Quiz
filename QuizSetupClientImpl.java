@@ -106,7 +106,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 					this.showPlayers();
 					break;
 				case 4:
-					showQuizzes();
+					this.showQuizzes();
 					break;
 				case 5:
 					run = false;
@@ -185,7 +185,8 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 */
 	public void showPlayers() throws RemoteException {
 		if (this.quizService.getPlayers().isEmpty()) {
-			System.out.println("No players added.");
+			System.out.println("No players yet.");
+			System.out.println("");
 		} else {
 			System.out.println("");
 			System.out.println("All players");
@@ -214,14 +215,19 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 * @throws RemoteException 
 	 */
 	public void showQuizzes() throws RemoteException {
-		System.out.println("All quizzes");
-		System.out.println("ID\tName");
-		for (Quiz q : this.quizService.getQuizzes()) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(q.getId());
-			sb.append("\t");
-			sb.append(q.getTitle());
-			System.out.println(sb.toString());
+		if (this.quizService.getQuizzes().isEmpty()) {
+			System.out.println("No quizzes yet.");
+			System.out.println("");
+		} else {
+			System.out.println("All quizzes");
+			System.out.println("ID\tName");
+			for (Quiz q : this.quizService.getQuizzes()) {
+				StringBuilder sb = new StringBuilder();
+				sb.append(q.getId());
+				sb.append("\t");
+				sb.append(q.getTitle());
+				System.out.println(sb.toString());
+			}
 		}
 	}
 }
