@@ -19,7 +19,7 @@ public class QuestionImplTest {
 		int score = 1;
 		
 		q = new QuestionImpl(id, text);
-		a = new AnswerImpl(atext, score);
+		a = new AnswerImpl(1, atext, score);
 	}
 
 	@Test

@@ -15,11 +15,13 @@ public class QuestionImpl implements Question {
 	private int id;
 	private String text;
 	private List<Answer> answers;
+	private int answerId;
 
 	public QuestionImpl(int id, String text) {
 		this.id = id;
 		this.text = text;
 		this.answers = new ArrayList<>();
+		this.answerId = 0;
 	}
 
 	/**
@@ -53,8 +55,40 @@ public class QuestionImpl implements Question {
 	 * @param answer the answer to be added;
 	 * the answer includes a score specifying if it is correct
 	 */
-	public void addAnswer(Answer answer) {
-		this.answers.add(answer);
+	public void addAnswers() {
+		boolean addNewAnswer = true;
+		String text;
+		int score = 0;
+		Answer a;
+		String promptResponse = "";
+		
+		while (addNewAnswer) {
+			System.out.print("Enter answer: ");
+			text = System.console().readLine();
+			
+			do {
+				System.out.print("Answer correct (y/n): ");
+				promptResponse = System.console().readLine();
+				if (promptResponse.equals("y")) {
+					score = 1;
+				} else if (promptResponse.equals("y")) {
+					score = 0;
+				}
+			} while ( !(promptResponse.equals("y") || promptResponse.equals("n")) );
+
+			answerId++;
+			promptResponse = "";
+			
+			a = new AnswerImpl(answerId, text, score);
+			this.answers.add(a);
+
+			System.out.print("Hit Return to add another answer or n to enter the next question: ");
+			promptResponse = System.console().readLine();
+			if (promptResponse.equals("n") || promptResponse.equals("N")) {
+				addNewAnswer = false;
+			}
+		}
+
 	}
 
 	/**

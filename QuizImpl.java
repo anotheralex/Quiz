@@ -97,10 +97,10 @@ public class QuizImpl implements Quiz {
 			text = System.console().readLine();
 			questionId++;
 			q = new QuestionImpl(questionId, text);
+			q.addAnswers();
 			this.questions.add(q);
 
-			System.out.println("");
-			System.out.print("Hit Return to continue or q to quit: ");
+			System.out.print("Hit Return to add another question or q to quit: ");
 			promptResponse = System.console().readLine();
 			if (promptResponse.equals("q") ||
 					promptResponse.equals("Q") ||

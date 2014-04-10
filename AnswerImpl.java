@@ -7,6 +7,7 @@
  */
 public class AnswerImpl implements Answer {
 	
+	private int id;
 	private String text;
 	private int score;
 
@@ -16,7 +17,8 @@ public class AnswerImpl implements Answer {
 	 * @param text the text of the answer
 	 * @param score the score of the answer - 0 or 1
 	 */
-	public AnswerImpl(String text, int score) {
+	public AnswerImpl(int id, String text, int score) {
+		this.setId(id);
 		this.text = text;
 		this.score = score;
 	}
@@ -49,12 +51,30 @@ public class AnswerImpl implements Answer {
 	}
 
 	/**
-	 * Specificy whether an answer is correct or not
+	 * Specify whether an answer is correct or not
 	 *
 	 * @param score equals 1 for correct and 0 for incorrect
 	 */
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	/**
+	 * Get answer ID
+	 * 
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * Set answer ID
+	 * 
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

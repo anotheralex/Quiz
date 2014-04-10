@@ -37,7 +37,7 @@ public interface Question {
 	 * @param answer the answer to be added;
 	 * the answer includes a score specifying if it is correct
 	 */
-	void addAnswer(Answer answer);
+	void addAnswers();
 
 	/**
 	 * Return a list of answers for the question
