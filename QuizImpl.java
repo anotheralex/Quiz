@@ -30,6 +30,7 @@ public class QuizImpl implements Quiz {
 		this.questions = new ArrayList<>();
 		this.isActive = false;
 		this.questionId = 0;
+		this.addQuestions();
 	}
 
 	/**
