@@ -83,11 +83,12 @@ public class QuizImpl implements Quiz {
 			questionId++;
 			q = new QuestionImpl(questionId, text);
 			this.questions.add(q);
-			
-			System.out.println("Add another (y/n)?");
+
+			System.out.println("");
+			System.out.println("Add another (y/n)? ");
 			promptResponse = System.console().readLine();
 			if (promptResponse.equals("n") ||
-					promptResponse.equals("n0") ||
+					promptResponse.equals("no") ||
 					promptResponse.equals("N") ||
 					promptResponse.equals("No")) {
 				addNewQuestion = false;
