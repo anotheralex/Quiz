@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  *
  */
 
-public class QuizImpl implements Quiz {
+public class QuizImpl implements Quiz, Serializable {
 
 	private int id;
 	private String title;
