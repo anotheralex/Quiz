@@ -72,16 +72,26 @@ public class QuizImpl implements Quiz {
 	 * Add a new question (and associated potential answers) to a quiz
 	 */
 	public void addQuestions() {
-		boolean addQuestion = true;
+		boolean addNewQuestion = true;
 		String text;
 		Question q;
+		String promptResponse;
 		
-		while (addQuestion) {
+		while (addNewQuestion) {
 			System.out.print("Enter question: ");
 			text = System.console().readLine();
 			questionId++;
 			q = new QuestionImpl(questionId, text);
 			this.questions.add(q);
+			
+			System.out.println("Add another (y/n)?");
+			promptResponse = System.console().readLine();
+			if (promptResponse.equals("n") ||
+					promptResponse.equals("n0") ||
+					promptResponse.equals("N") ||
+					promptResponse.equals("No")) {
+				addNewQuestion = false;
+			}
 		}
 	}
 
