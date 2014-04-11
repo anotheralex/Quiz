@@ -52,7 +52,7 @@ public interface QuizPlayerClient {
 	/**
 	 * Play a quiz game
 	 */
-	void playQuiz(int id) throws RemoteException;
+	void playQuiz() throws RemoteException;
 	
 	/**
 	 * Show the top scores for all quizzes

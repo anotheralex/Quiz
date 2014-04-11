@@ -41,13 +41,13 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 	 * Display a menu with user options
 	 */
 	public void showMenu() {
-		System.out.println("QUIZ SETUP CLIENT MAIN MENU");
+		System.out.println("QUIZ PLAYER CLIENT MAIN MENU");
 		System.out.println("");
 		System.out.println("Select one of the following options:");
 		System.out.println("1. Add new player");
-		System.out.println("2. Add new quiz");
-		System.out.println("3. Show current players");
-		System.out.println("4. Show current quizzes");
+		System.out.println("2. Show current players");
+		System.out.println("3. Show current quizzes");
+		System.out.println("4. Play quiz");
 		System.out.println("5. Quit");
 		System.out.println("");
 		System.out.print("Option (1-5): ");
@@ -60,7 +60,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 	private void switcher() throws RemoteException {
 		boolean run = true;
 		while (run) {
-			showMenu();
+			this.showMenu();
 		
 			int choice = 0;
 			try {
@@ -75,8 +75,27 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 			 */
 			switch (choice) {
 				case 1:
+					try {
+						String name = this.getPlayerDetails();
+						Player newPlayer = this.quizService.addPlayer(name);
+						System.out.println("Player added.");
+						System.out.println("");
+						quizService.printMessage("Player added.");
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					break;
 				case 2:
+					this.showPlayers();
+					break;
+				case 3:
+					this.showQuizzes();
+					break;
+				case 4:
+					this.playQuiz();
+				case 5:
+					run = false;
 					break;
 				default:
 					System.out.println("Invalid option. PLease try again.");
@@ -85,32 +104,80 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		}
 	}
 	
-	
-	@Override
+	/**
+	 * Get the name of a new player
+	 *
+	 * @return the name of the player
+	 */
+	public String getPlayerDetails() {
+		String name;
+		do {
+			System.out.print("Enter player name: ");
+			name = System.console().readLine();
+		} while (name.equals(""));
+
+		return name;
+	}
+
+	/**
+	 * Show a list of all players
+	 * @throws RemoteException 
+	 */
 	public void showPlayers() throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		if (this.quizService.getPlayers().isEmpty()) {
+			System.out.println("No players yet.");
+			System.out.println("");
+		} else {
+			System.out.println("");
+			System.out.println("All players");
+			System.out.println("ID\tName");
+			for (Player p : this.quizService.getPlayers()) {
+				StringBuilder sb = new StringBuilder();
+				sb.append(p.getId());
+				sb.append("\t");
+				sb.append(p.getName());
+				System.out.println(sb.toString());
+			}
+			System.out.println("");
+		}
 	}
 
-	@Override
+	/**
+	 * Show a list of all quizzes
+	 * @throws RemoteException 
+	 */
 	public void showQuizzes() throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		if (this.quizService.getQuizzes().isEmpty()) {
+			System.out.println("No quizzes yet.");
+			System.out.println("");
+		} else {
+			System.out.println("All quizzes");
+			System.out.println("ID\tName");
+			for (Quiz q : this.quizService.getQuizzes()) {
+				StringBuilder sb = new StringBuilder();
+				sb.append(q.getId());
+				sb.append("\t");
+				sb.append(q.getTitle());
+				System.out.println(sb.toString());
+			}
+		}
 	}
 
-	@Override
 	public void showQuizQuestions(int id) throws RemoteException {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void playQuiz(int id) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+	public void playQuiz() throws RemoteException {
+		System.out.print("Enter the id of the quiz you want to play: ");
+		int id = Integer.parseInt(System.console().readLine());
+		if (this.quizService.quizWithIdExists(id)) {
+			// TODO: run quiz
+		} else {
+			System.out.println("No quiz with ID " + id + " exists.");
+		}
 	}
 
-	@Override
 	public void getTopScores() throws RemoteException {
 		// TODO Auto-generated method stub
 		
