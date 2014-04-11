@@ -174,7 +174,8 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		if (this.quizService.quizWithIdExists(id)) {
 			// TODO: run quiz
 		} else {
-			System.out.println("No quiz with ID " + id + " exists.");
+			System.out.println("Sorry, no quiz with ID \"" + id + "\" exists.\n1");
+			this.switcher();
 		}
 	}
 
