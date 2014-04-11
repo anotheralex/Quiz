@@ -73,4 +73,13 @@ public interface QuizService extends Remote {
 	 * @throws RemoteException
 	 */
 	Quiz getQuizFromId(int id) throws RemoteException;
+	
+	/**
+	 * Check if a quiz with a given ID exists
+	 * 
+	 * @param id the ID of the quiz
+	 * @return true if quiz exists otherwise false
+	 */
+	boolean quizWithIdExists(int id) throws RemoteException;
+
 }

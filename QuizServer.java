@@ -150,4 +150,19 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		return null;
 	}
 
+	/**
+	 * Check if a quiz with a given ID exists
+	 * 
+	 * @param id the ID of the quiz
+	 * @return true if quiz exists otherwise false
+	 */
+	public boolean quizWithIdExists(int id) {
+		for (Quiz q : this.quizzes) {
+			if (q.getId() == id) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
