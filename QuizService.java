@@ -64,4 +64,13 @@ public interface QuizService extends Remote {
 	 * Print a message to the console
 	 */
 	void printMessage(String message) throws RemoteException;
+	
+	/**
+	 * Find the quiz with a given ID
+	 * 
+	 * @param id the ID of the quiz
+	 * 
+	 * @return the Quiz object with ID id
+	 */
+	Quiz getQuizFromId(int id);
 }
