@@ -134,4 +134,20 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		System.out.println(message);
 	}
 
+	/**
+	 * Get the Quiz object associated with an ID
+	 * 
+	 * @param id the ID of a quiz
+	 * @return quiz the Quiz object with ID id
+	 * or null if there is no matching quiz
+	 */
+	public Quiz getQuizFromId(int id) {
+		for (Quiz quiz : quizzes) {
+			if (quiz.getId() == id) {
+				return quiz;
+			}
+		}
+		return null;
+	}
+
 }
