@@ -93,6 +93,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 					this.showQuizzes();
 					break;
 				case 4:
+					this.showQuizzes();
 					this.playQuiz();
 				case 5:
 					run = false;
@@ -168,13 +169,22 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		
 	}
 
+	/**
+	 * Ask for and play a particular quiz, identified by its ID
+	 * 
+	 * @throws RemoteException
+	 */
 	public void playQuiz() throws RemoteException {
 		System.out.print("Enter the id of the quiz you want to play: ");
 		int id = Integer.parseInt(System.console().readLine());
 		if (this.quizService.quizWithIdExists(id)) {
-			// TODO: run quiz
+			Quiz quiz = this.quizService.getQuizFromId(id);
+			System.out.println("Number of questions: " + quiz.getQuestions().size());
+			for (Question q : quiz.getQuestions()) {
+				System.out.println(q.getText());
+			}
 		} else {
-			System.out.println("Sorry, no quiz with ID \"" + id + "\" exists.\n1");
+			System.out.println("Sorry, no quiz with ID \"" + id + "\" exists.\n");
 			this.switcher();
 		}
 	}
