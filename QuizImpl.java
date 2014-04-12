@@ -13,6 +13,7 @@ import java.util.List;
 
 public class QuizImpl implements Quiz, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String title;
 	private List<Question> questions;
@@ -30,7 +31,7 @@ public class QuizImpl implements Quiz, Serializable {
 		this.title = title;
 		this.questions = new ArrayList<>();
 		this.isActive = false;
-		this.questionId = 0;
+		this.questionId = 1;
 	}
 
 	/**
@@ -96,8 +97,8 @@ public class QuizImpl implements Quiz, Serializable {
 		while (addNewQuestion) {
 			System.out.print("Enter question: ");
 			text = System.console().readLine();
-			questionId++;
 			q = new QuestionImpl(questionId, text);
+			this.questionId++;
 			q.addAnswers();
 			this.questions.add(q);
 
@@ -125,8 +126,12 @@ public class QuizImpl implements Quiz, Serializable {
 	 * Print the questions in the current quiz
 	 */
 	public void printQuestions() {
-		for (Question q : questions) {
-			System.out.println(q.getText());
+		if (this.questions.size() == 0) {
+			System.out.println("Sorry. There are no questions in this quiz.");
+		} else {
+			for (Question q : this.questions) {
+				System.out.println(q.getText());
+			}
 		}
 	}
 

@@ -165,8 +165,10 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 	}
 
 	public void showQuizQuestions(int id) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		Quiz quiz = this.quizService.getQuizFromId(id);
+		for (Question q : quiz.getQuestions()) {
+			System.out.println(q.getText());
+		}
 	}
 
 	/**
@@ -179,10 +181,18 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		int id = Integer.parseInt(System.console().readLine());
 		if (this.quizService.quizWithIdExists(id)) {
 			Quiz quiz = this.quizService.getQuizFromId(id);
+			
+			/*
+			 * Debugging methods to check that questions are being retrieved 
+			 */
+			System.out.println("Quiz with ID " + quiz.getId() + " exists.");
+			quiz.printQuestions();
 			System.out.println("Number of questions: " + quiz.getQuestions().size());
+			
 			for (Question q : quiz.getQuestions()) {
 				System.out.println(q.getText());
 			}
+			this.switcher();
 		} else {
 			System.out.println("Sorry, no quiz with ID \"" + id + "\" exists.\n");
 			this.switcher();
