@@ -1,12 +1,13 @@
-//package quiz;
+import java.io.Serializable;
 
 /**
  * A data structure for holding a String containing the text of 
  * an answer and an int indicating whether the answer is
  * correct or not
  */
-public class AnswerImpl implements Answer {
+public class AnswerImpl implements Answer, Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String text;
 	private int score;

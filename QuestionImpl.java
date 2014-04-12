@@ -1,5 +1,6 @@
 //package quiz;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -10,8 +11,9 @@ import java.util.*;
  * is correct
  *
  */
-public class QuestionImpl implements Question {
+public class QuestionImpl implements Question, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String text;
 	private List<Answer> answers;
