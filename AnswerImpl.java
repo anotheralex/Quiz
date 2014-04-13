@@ -66,7 +66,7 @@ public class AnswerImpl implements Answer, Serializable {
 	 * @return the id
 	 */
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	/**

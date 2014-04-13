@@ -206,4 +206,21 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		
 	}
 
+	/**
+	 * Show the answers for a quiz question
+	 * get a response and generate a score
+	 * 
+	 * @param question the Question object
+	 * @return the score for the question
+	 */
+	public int getQuizQuestionAnswer(Question question) {
+		for (Answer a : question.getAnswers()) {
+			System.out.println(a.getId() + ". " + a.getText());
+		}
+		System.out.print("Answer: ");
+		int response = Integer.parseInt(System.console().readLine());
+		int score = 0;
+		return score;
+	}
+
 }

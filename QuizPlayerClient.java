@@ -58,4 +58,12 @@ public interface QuizPlayerClient {
 	 * Show the top scores for all quizzes
 	 */
 	void getTopScores() throws RemoteException;
+	
+	/**
+	 * Show the answers for a quiz question
+	 * get a response and generate a score
+	 * 
+	 * @return the score for the question
+	 */
+	int getQuizQuestionAnswer(Question question);
 }

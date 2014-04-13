@@ -15,6 +15,11 @@ public interface Answer {
 	/**
 	 * Getter for Answer text
 	 */
+	int getId();
+
+	/**
+	 * Getter for Answer text
+	 */
 	String getText();
 
 	/**
