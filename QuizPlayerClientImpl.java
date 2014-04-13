@@ -181,16 +181,6 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		int id = Integer.parseInt(System.console().readLine());
 		if (this.quizService.quizWithIdExists(id)) {
 			Quiz quiz = this.quizService.getQuizFromId(id);
-			
-			/*
-			 * Debugging methods to check that questions are being retrieved 
-			 */
-			System.out.println("Quiz with ID " + quiz.getId() + " exists.");
-			System.out.println("Title: " + quiz.getTitle());
-			System.out.println("Printing questions...");
-			quiz.printQuestions();
-			System.out.println("Number of questions: " + quiz.getQuestions().size());
-			
 			for (Question q : quiz.getQuestions()) {
 				System.out.println(q.getText());
 				this.getQuizQuestionAnswer(q);
