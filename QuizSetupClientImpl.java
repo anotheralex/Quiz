@@ -91,17 +91,6 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 					}
 					break;
 				case 2:
-					/*
-					try {
-						String title = this.getQuizDetails();
-						Quiz newQuiz = this.quizService.addQuiz(title);
-						this.quizService.getQuizFromId(newQuiz.getId()).addQuestions();
-						this.quizService.printMessage("Quiz added.");
-					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					*/
 					this.addQuiz();
 					break;
 				case 3:
@@ -114,16 +103,16 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 					run = false;
 					break;
 				default:
-					System.out.println("Invalid option. PLease try again.");
-					System.out.println("");
+					System.out.println("Invalid option. Please try again.");
 			}
 		}
 	}
 
 	/**
-	 * Get the name of a new player
+	 * Get the string for a new player name
+	 * String cannot be empty
 	 *
-	 * @return the name of the player
+	 * @return the name string
 	 */
 	public String getPlayerDetails() {
 		String name;
@@ -131,14 +120,14 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			System.out.print("Enter player name: ");
 			name = System.console().readLine();
 		} while (name.equals(""));
-
 		return name;
 	}
 
 	/**
-	 * Get the name of a new player
+	 * Get the string for a new quiz title
+	 * String cannot be empty
 	 *
-	 * @return the name of the player
+	 * @return the title string
 	 */
 	public String getQuizDetails() {
 		String title;
@@ -146,7 +135,6 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			System.out.print("Enter quiz title: ");
 			title = System.console().readLine();
 		} while (title.equals(""));
-
 		return title;
 	}
 
@@ -159,9 +147,8 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			Quiz newQuiz = new QuizImpl(this.quizService.getNextQuizId(), title);
 			newQuiz.addQuestions();
 			this.quizService.addQuiz(newQuiz);
-			this.quizService.printMessage("Quiz added (created locally).");
+			this.quizService.printMessage("Quiz added.");
 		} catch (RemoteException e) {
-			System.out.println("Error. Could not add new Quiz object to List<Quiz> on server.");
 			e.printStackTrace();
 		}
 	}
@@ -196,8 +183,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 */
 	public void showPlayers() throws RemoteException {
 		if (this.quizService.getPlayers().isEmpty()) {
-			System.out.println("No players yet.");
-			System.out.println("");
+			System.out.println("No players yet.\n");
 		} else {
 			System.out.println("");
 			System.out.println("All players");
@@ -227,8 +213,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 */
 	public void showQuizzes() throws RemoteException {
 		if (this.quizService.getQuizzes().isEmpty()) {
-			System.out.println("No quizzes yet.");
-			System.out.println("");
+			System.out.println("No quizzes yet.\n");
 		} else {
 			System.out.println("All quizzes");
 			System.out.println("ID\tName");
