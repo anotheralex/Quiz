@@ -17,6 +17,13 @@ public interface QuizService extends Remote {
 	Quiz addQuiz(String title) throws RemoteException;
 
 	/**
+	 * Adds a new Quiz to the list
+	 *
+	 * @param quiz the Quiz object to add
+	 */
+	void addQuiz(Quiz quiz) throws RemoteException;
+
+	/**
 	 * Start a specified quiz
 	 *
 	 * @param id the id of the quiz to start
