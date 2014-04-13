@@ -104,4 +104,16 @@ public interface QuizService extends Remote {
 	 */
 	int getNextQuizId() throws RemoteException;
 
+	/**
+	 * Create a record from a quiz play
+	 * @param record the Record object to store
+	 */
+	void addRecord(Record record) throws RemoteException;
+	
+	/**
+	 * Get the next available record ID
+	 * 
+	 * @return the next ID available and assumes it will be used
+	 */
+	int getNextRecordId() throws RemoteException;
 }

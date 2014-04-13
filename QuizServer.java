@@ -192,4 +192,25 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		this.quizId++;
 		return result;
 	}
+	
+	/**
+	 * Get the next available record ID
+	 * 
+	 * @return the next ID available and assumes it will be used
+	 */
+	public synchronized int getNextRecordId() throws RemoteException {
+		int result = this.recordId;
+		this.recordId++;
+		return result;
+	}
+
+	
+	/**
+	 * Create a record from a quiz play
+	 * @param record the Record object to store
+	 */
+	public synchronized void addRecord(Record record) {
+		this.history.add(record);
+	}
+
 }

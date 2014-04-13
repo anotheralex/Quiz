@@ -180,6 +180,8 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 				quizScore += this.getQuizQuestionAnswer(q);
 			}
 			System.out.println("Score: " + quizScore);
+			Record record = new Record(this.quizService.getNextRecordId(), 0, quiz.getId(), quizScore);
+			this.quizService.addRecord(record);
 			this.switcher();
 		} else {
 			System.out.println("Sorry, no quiz with ID \"" + id + "\" exists.\n");
