@@ -21,16 +21,20 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	
 	private int playerId;
 	private List<Player> players;
+	
+	// list of Record objects including the history of all quiz plays
+	private int recordId;
+	private List<Record> history;
 
 	public QuizServer() throws RemoteException {
-		// next ID for quizzes and players
-		// both start at 1
-		quizId = 1;
-		playerId = 1;
+		// next available ID for players, quizzes and records
+		this.quizId = 1;
+		this.playerId = 1;
+		this.recordId = 1;
 		
-		quizzes = new ArrayList<>();
-		players = new ArrayList<>();
-
+		this.quizzes = new ArrayList<>();
+		this.players = new ArrayList<>();
+		this.history = new ArrayList<>();
 	}
 
 	/**
