@@ -91,6 +91,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 					}
 					break;
 				case 2:
+					/*
 					try {
 						String title = this.getQuizDetails();
 						Quiz newQuiz = this.quizService.addQuiz(title);
@@ -100,7 +101,8 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
+					*/
+					this.addQuiz();
 					break;
 				case 3:
 					this.showPlayers();
@@ -153,6 +155,15 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 * Add a new quiz
 	 */
 	public void addQuiz() {
+		try {
+			String title = this.getQuizDetails();
+			Quiz newQuiz = this.quizService.addQuiz(title);
+			this.quizService.getQuizFromId(newQuiz.getId()).addQuestions();
+			this.quizService.printMessage("Quiz added.");
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
