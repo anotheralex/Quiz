@@ -180,6 +180,14 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		}
 	}
 
-	
-	
+	/**
+	 * Get the next available quiz ID
+	 * 
+	 * @return the next ID available and assumes it will be used
+	 */
+	public synchronized int getNextQuizId() throws RemoteException {
+		int result = this.quizId;
+		this.quizId++;
+		return result;
+	}
 }

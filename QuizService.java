@@ -89,5 +89,12 @@ public interface QuizService extends Remote {
 	 * @throws RemoteException 
 	 */
 	void addQuestions(int id) throws RemoteException;
+	
+	/**
+	 * Get the next available quiz ID
+	 * 
+	 * @return the next ID available and assumes it will be used
+	 */
+	int getNextQuizId() throws RemoteException;
 
 }
