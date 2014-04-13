@@ -116,4 +116,10 @@ public interface QuizService extends Remote {
 	 * @return the next ID available and assumes it will be used
 	 */
 	int getNextRecordId() throws RemoteException;
+	
+	/**
+	 * Create a list of the most recent quiz play records
+	 * List is size 10 (or less if there are fewer than 10 records)
+	 */
+	List<Record> getRecentHistory() throws RemoteException;
 }
