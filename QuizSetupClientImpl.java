@@ -150,16 +150,30 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 		return title;
 	}
 
-	
 	/**
 	 * Add a new quiz
 	 */
 	public void addQuiz() {
+		/*
+		 * Previous attempt
+		 * not working since questions are not being added
+		 * will now try to create object locally instead
 		try {
 			String title = this.getQuizDetails();
 			Quiz newQuiz = this.quizService.addQuiz(title);
 			this.quizService.getQuizFromId(newQuiz.getId()).addQuestions();
 			this.quizService.printMessage("Quiz added.");
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		try {
+			String title = this.getQuizDetails();
+			Quiz newQuiz = new QuizImpl(this.quizService.getNextQuizId(), title);
+			newQuiz.addQuestions();
+			this.quizService.addQuiz(newQuiz);
+			this.quizService.printMessage("Quiz added (created locally).");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
