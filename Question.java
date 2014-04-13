@@ -46,4 +46,12 @@ public interface Question {
 	 * or null if there are none
 	 */
 	List<Answer> getAnswers();
+	
+	/**
+	 * Get the Answer object associated with an answer ID
+	 * 
+	 * @param id the ID of the answer
+	 * @return the Answer object with ID id
+	 */
+	Answer getAnswerFromId(int id);
 }

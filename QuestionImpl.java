@@ -102,4 +102,20 @@ public class QuestionImpl implements Question, Serializable {
 	public List<Answer> getAnswers() {
 		return this.answers;
 	}
+	
+	/**
+	 * Get the Answer object associated with an answer ID
+	 * 
+	 * @param id the ID of the answer
+	 * @return the Answer object with ID id or null if none
+	 */
+	public Answer getAnswerFromId(int id) {
+		for (Answer a : this.getAnswers()) {
+			if (a.getId() == id) {
+				return a;
+			}
+		}
+		return null;
+	}
+
 }
