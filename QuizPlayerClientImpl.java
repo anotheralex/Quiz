@@ -193,6 +193,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 			
 			for (Question q : quiz.getQuestions()) {
 				System.out.println(q.getText());
+				this.getQuizQuestionAnswer(q);
 			}
 			this.switcher();
 		} else {
@@ -219,8 +220,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		}
 		System.out.print("Answer: ");
 		int response = Integer.parseInt(System.console().readLine());
-		int score = 0;
-		return score;
+		return question.getAnswerFromId(response).getScore();
 	}
 
 }
