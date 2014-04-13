@@ -95,7 +95,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 						String title = this.getQuizDetails();
 						Quiz newQuiz = this.quizService.addQuiz(title);
 						newQuiz.addQuestions();
-						quizService.printMessage("Quiz added.");
+						this.quizService.printMessage("Quiz added.");
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

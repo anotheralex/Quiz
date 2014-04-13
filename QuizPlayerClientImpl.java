@@ -186,6 +186,8 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 			 * Debugging methods to check that questions are being retrieved 
 			 */
 			System.out.println("Quiz with ID " + quiz.getId() + " exists.");
+			System.out.println("Title: " + quiz.getTitle());
+			System.out.println("Printing questions...");
 			quiz.printQuestions();
 			System.out.println("Number of questions: " + quiz.getQuestions().size());
 			

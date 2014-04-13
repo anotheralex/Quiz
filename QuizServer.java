@@ -165,4 +165,21 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		return false;
 	}
 
+	/**
+	 * Add questions to a specific quiz
+	 * 
+	 * @param id the ID of the quiz to add the questions to
+	 * @return true if successfully added and false otherwise
+	 * @throws RemoteException 
+	 */
+	public void addQuestions(int id) throws RemoteException {
+		if (this.quizWithIdExists(id)) {
+			this.getQuizFromId(id).addQuestions();
+		} else {
+			System.out.println("Sorry, there is no quiz with ID " + id);
+		}
+	}
+
+	
+	
 }
