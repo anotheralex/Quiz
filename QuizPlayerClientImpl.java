@@ -41,7 +41,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 	 * Display a menu with user options
 	 */
 	public void showMenu() {
-		System.out.println("QUIZ PLAYER CLIENT MAIN MENU");
+		System.out.println("\nQUIZ PLAYER CLIENT MAIN MENU");
 		System.out.println("");
 		System.out.println("Select one of the following options:");
 		System.out.println("1. Add new player");
@@ -177,14 +177,16 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 	 * @throws RemoteException
 	 */
 	public void playQuiz() throws RemoteException {
+		int quizScore = 0;
 		System.out.print("Enter the id of the quiz you want to play: ");
 		int id = Integer.parseInt(System.console().readLine());
 		if (this.quizService.quizWithIdExists(id)) {
 			Quiz quiz = this.quizService.getQuizFromId(id);
 			for (Question q : quiz.getQuestions()) {
 				System.out.println(q.getText());
-				this.getQuizQuestionAnswer(q);
+				quizScore += this.getQuizQuestionAnswer(q);
 			}
+			System.out.println("Score: " + quizScore);
 			this.switcher();
 		} else {
 			System.out.println("Sorry, no quiz with ID \"" + id + "\" exists.\n");
