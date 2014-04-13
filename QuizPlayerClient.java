@@ -66,4 +66,9 @@ public interface QuizPlayerClient {
 	 * @return the score for the question
 	 */
 	int getQuizQuestionAnswer(Question question);
+	
+	/**
+	 * Show a list of recent play records
+	 */
+	void showRecentHistory();
 }

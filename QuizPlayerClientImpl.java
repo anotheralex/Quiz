@@ -3,6 +3,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 
 public class QuizPlayerClientImpl implements QuizPlayerClient {
@@ -47,8 +48,9 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		System.out.println("2. Show current players");
 		System.out.println("3. Show current quizzes");
 		System.out.println("4. Play quiz");
-		System.out.println("5. Quit\n");
-		System.out.print("Option (1-5): ");
+		System.out.println("5. Show recent history");
+		System.out.println("6. Quit\n");
+		System.out.print("Option (1-6): ");
 	}
 
 	/**
@@ -93,6 +95,9 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 					this.showQuizzes();
 					this.playQuiz();
 				case 5:
+					this.showRecentHistory();
+					break;
+				case 6:
 					run = false;
 					break;
 				default:
@@ -209,4 +214,29 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		int response = Integer.parseInt(System.console().readLine());
 		return question.getAnswerFromId(response).getScore();
 	}
+	
+	/**
+	 * Show a list of recent play records
+	 */
+	public void showRecentHistory() {
+		List<Record> recent = null;
+		try {
+			recent = this.quizService.getRecentHistory();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (recent.size() == 0) {
+			System.out.println("Sorry, no history to display.");
+		} else {
+			System.out.println("Quiz ID\tPlayer ID\tQuiz Score");
+			for (Record r : recent) {
+				StringBuilder sb = new StringBuilder();
+				System.out.println(r.getQuizID() + "\t" + r.getPlayerId() + "\t" + r.getQuizScore());
+			}
+		}
+		
+	}
+
 }

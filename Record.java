@@ -1,13 +1,15 @@
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Object that stores the record of a quiz game
  */
-public class Record {
+public class Record implements Serializable {
 	
 	/*
 	 * use final since records should be immutable
 	 */
+	private static final long serialVersionUID = 1L;
 	private final int recordId;
 	private final Calendar date;
 	private final int playerId;
