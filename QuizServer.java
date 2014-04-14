@@ -37,6 +37,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		this.history = new ArrayList<>();
 	}
 
+	// TODO Functionality now in addQuiz(Quiz)
 	/**
 	 * Creates a new quiz
 	 */
@@ -52,7 +53,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 *
 	 * @param quiz the Quiz object to add
 	 */
-	public void addQuiz(Quiz quiz) throws RemoteException {
+	public synchronized void addQuiz(Quiz quiz) throws RemoteException {
 		this.quizzes.add(quiz);
 	}
 	
@@ -92,6 +93,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		}
 	}
 
+	// TODO This functionality is now in QuizSetupClient.showQUixxes()
 	/**
 	 * List all available quizzes
 	 */
@@ -167,6 +169,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		return false;
 	}
 
+	// TODO This method is now deprecated and the functionality is in QuizSetupClient
 	/**
 	 * Add questions to a specific quiz
 	 * 
