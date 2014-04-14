@@ -140,17 +140,22 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 
 	/**
 	 * Add a new quiz
+	 * 
+	 * @return the id of the quiz if successfully created otherwise 0
 	 */
-	public void addQuiz() {
+	public int addQuiz() {
+		Quiz newQuiz;
 		try {
 			String title = this.getQuizDetails();
-			Quiz newQuiz = new QuizImpl(this.quizService.getNextQuizId(), title);
+			newQuiz = new QuizImpl(this.quizService.getNextQuizId(), title);
 			newQuiz.addQuestions();
 			this.quizService.addQuiz(newQuiz);
 			this.quizService.printMessage("Quiz added.");
+			return newQuiz.getId();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		return 0;
 	}
 
 	/**

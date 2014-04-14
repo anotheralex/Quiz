@@ -2,8 +2,6 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-// package quiz;
-
 /**
  * A client for setting up new quizzes
  */
@@ -42,9 +40,9 @@ public interface QuizSetupClient {
 	/**
 	 * Add a new quiz
 	 *
-	 * @return the IF of the quiz
+	 * @return the ID of the quiz
 	 */
-	void addQuiz();
+	int addQuiz();
 
 	/**
 	 * Show the details of a specified player
