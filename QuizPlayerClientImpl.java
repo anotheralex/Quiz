@@ -232,7 +232,6 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		} else {
 			System.out.println("Quiz ID\tPlayer ID\tQuiz Score");
 			for (Record r : recent) {
-				StringBuilder sb = new StringBuilder();
 				System.out.println(r.getQuizID() + "\t" + r.getPlayerId() + "\t" + r.getQuizScore());
 			}
 		}
