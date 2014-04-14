@@ -30,7 +30,7 @@ public class QuizImpl implements Quiz, Serializable {
 		this.id = id;
 		this.title = title;
 		this.questions = new ArrayList<>();
-		this.isActive = false;
+		this.isActive = true;
 		this.questionId = 1;
 	}
 
