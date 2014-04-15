@@ -93,6 +93,15 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		}
 	}
 
+	/**
+	 * Add a new player and add it to the list of players
+	 *
+	 * @param player the Player object to add
+	 */
+	public synchronized void addPlayer(Player player) {
+		this.players.add(player);
+	}
+
 	// TODO This functionality is now in QuizSetupClient.showQUixxes()
 	/**
 	 * List all available quizzes

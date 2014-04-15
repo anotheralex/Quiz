@@ -49,6 +49,15 @@ public interface QuizService extends Remote {
 	Player addPlayer(String name) throws RemoteException;
 
 	/**
+	 * Add a new player
+	 *
+	 * @param name the name of the new player
+	 *
+	 * @return the id of the new player
+	 */
+	void addPlayer(Player player) throws RemoteException;
+
+	/**
 	 * List all available quizzes
 	 */
 	void listQuizzes() throws RemoteException;

@@ -79,16 +79,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			 */
 			switch (choice) {
 				case 1:
-					try {
-						String name = this.getPlayerDetails();
-						Player newPlayer = this.quizService.addPlayer(name);
-						System.out.println("Player added.");
-						System.out.println("");
-						quizService.printMessage("Player added.");
-					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					this.addPlayer();
 					break;
 				case 2:
 					this.addQuiz();
@@ -124,6 +115,26 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	}
 
 	/**
+	 * Add a new player
+	 * Players have unique usernames and an ID
+	 * 
+	 * @return playerId the ID of the newly created player
+	 * @throws RemoteException 
+	 */
+	public int addPlayer() throws RemoteException {
+		int playerId = this.quizService.getNextPlayerId();
+		String name = this.getPlayerDetails();
+		
+		Player newPlayer = new PlayerImpl(playerId, name);
+		this.quizService.addPlayer(newPlayer);
+		
+		System.out.println("Player added.\n");
+		quizService.printMessage("Player added.");
+
+		return newPlayer.getId();
+	}
+
+	/**
 	 * Get the string for a new quiz title
 	 * String cannot be empty
 	 *
@@ -156,30 +167,6 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			e.printStackTrace();
 		}
 		return 0;
-	}
-
-	/**
-	 * Add a new question
-	 * 
-	 * Private method to be used by addQuiz()
-	 */
-	private void addQuestion() {
-	}
-
-	/**
-	 * Add a new answer
-	 * 
-	 * Private method to be used by addQuestion()
-	 */
-	private void addAnswer() {
-	}
-
-	/**
-	 * Show the details of a specified player
-	 *
-	 * @param id the ID of the player
-	 */
-	public void showPlayer(int id) {
 	}
 	
 	/**

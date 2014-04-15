@@ -28,8 +28,16 @@ public interface QuizSetupClient {
 	 *
 	 * @return the name the player
 	 */
-	String getPlayerDetails();	
+	String getPlayerDetails();
 
+	/**
+	 * Add a new player
+	 * Players have unique usernames and an ID
+	 * 
+	 * @return playerId the ID of the newly created player
+	 */
+	int addPlayer() throws RemoteException;
+	
 	/**
 	 * Get the details of a quiz to add
 	 *
@@ -44,13 +52,6 @@ public interface QuizSetupClient {
 	 */
 	int addQuiz();
 
-	/**
-	 * Show the details of a specified player
-	 *
-	 * @param id the ID of the player
-	 */
-	void showPlayer(int id);
-	
 	/**
 	 * Show a list of all players
 	 * @throws RemoteException 
