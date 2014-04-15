@@ -207,7 +207,17 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		return result;
 	}
 
-	
+	/**
+	 * Get the next available player ID
+	 * 
+	 * @return the next ID available and assumes it will be used
+	 */
+	public synchronized int getNextPlayerId() throws RemoteException {
+		int nextPlayerId = this.playerId;
+		this.playerId++;
+		return nextPlayerId; 
+	}
+
 	/**
 	 * Create a record from a quiz play
 	 * @param record the Record object to store
@@ -227,4 +237,5 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 			return this.history.subList(this.history.size() - 10, this.history.size());
 		}
 	}
+	
 }
