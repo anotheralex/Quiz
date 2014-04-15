@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Map;
 
 /**
  * Object that stores the record of a quiz game
@@ -14,6 +15,7 @@ public class Record implements Serializable {
 	private final Calendar date;
 	private final int playerId;
 	private final int quizId;
+	private final Map<Integer, Integer> quizAnswers;
 	private final int quizScore;
 
 	/**
@@ -26,11 +28,12 @@ public class Record implements Serializable {
 	 * @param quizId the quiz ID
 	 * @param quizScore the score of the quiz
 	 */
-	public Record(int recordId, int playerId, int quizId, int quizScore) {
+	public Record(int recordId, int playerId, int quizId, Map<Integer, Integer> quizAnswers, int quizScore) {
 		this.recordId = recordId;
 		this.date = Calendar.getInstance();
 		this.playerId = playerId;
 		this.quizId = quizId;
+		this.quizAnswers = quizAnswers;
 		this.quizScore = quizScore;
 	}
 	
@@ -73,4 +76,13 @@ public class Record implements Serializable {
 	public int getQuizScore() {
 		return this.quizScore;
 	}
+	
+	/**
+	 * Getter for answers
+	 * @return the answers map
+	 */
+	public Map<Integer, Integer> getQuizAnswers() {
+		return this.quizAnswers;
+	}
+
 }
