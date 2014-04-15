@@ -75,15 +75,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 			 */
 			switch (choice) {
 				case 1:
-					try {
-						String name = this.getPlayerDetails();
-						Player newPlayer = this.quizService.addPlayer(name);
-						System.out.println("Player added.");
-						quizService.printMessage("Player added.");
-					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					this.addPlayer();
 					break;
 				case 2:
 					this.showPlayers();
@@ -120,6 +112,26 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		} while (name.equals(""));
 
 		return name;
+	}
+
+	/**
+	 * Add a new player
+	 * Players have a unique username and an ID
+	 * 
+	 * @return playerId the ID of the newly created player
+	 * @throws RemoteException 
+	 */
+	public int addPlayer() throws RemoteException {
+		int playerId = this.quizService.getNextPlayerId();
+		String name = this.getPlayerDetails();
+		
+		Player newPlayer = new PlayerImpl(playerId, name);
+		this.quizService.addPlayer(newPlayer);
+		
+		System.out.println("Player added.");
+		quizService.printMessage("Player added.");
+
+		return newPlayer.getId();
 	}
 
 	/**
