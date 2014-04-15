@@ -3,7 +3,9 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class QuizPlayerClientImpl implements QuizPlayerClient {
@@ -188,6 +190,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 	 */
 	public void playQuiz() throws RemoteException {
 		int quizScore = 0;
+		Map<Integer, Integer> quizAnswers = new HashMap<>();
 		System.out.print("Enter the id of the quiz you want to play: ");
 		int id = Integer.parseInt(System.console().readLine());
 		if (this.quizService.quizWithIdExists(id)) {
@@ -195,9 +198,11 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 			for (Question q : quiz.getQuestions()) {
 				System.out.println(q.getText());
 				quizScore += this.getQuizQuestionAnswer(q);
+				// TODO this is putting the score and not the response
+				quizAnswers.put(q.getId(), this.getQuizQuestionAnswer(q));
 			}
 			System.out.println("Score: " + quizScore);
-			Record record = new Record(this.quizService.getNextRecordId(), 0, quiz.getId(), quizScore);
+			Record record = new Record(this.quizService.getNextRecordId(), 0, quiz.getId(), quizAnswers, quizScore);
 			this.quizService.addRecord(record);
 			this.switcher();
 		} else {
