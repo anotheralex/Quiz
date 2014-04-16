@@ -71,4 +71,5 @@ public interface QuizPlayerClient {
 	 * Show a list of recent play records
 	 */
 	void showRecentHistory();
+	
 }
