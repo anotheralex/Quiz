@@ -189,31 +189,52 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 	 * @throws RemoteException
 	 */
 	public void playQuiz() throws RemoteException {
+		
 		int quizScore = 0;
+		int answerId = 0;
+		Answer answer;
+		
+		// quizAnswers holds hold history of the questions and the answers given to each question
 		Map<Integer, Integer> quizAnswers = new HashMap<>();
+		
+		// prompt for an integer ID of the quiz to be played
 		System.out.print("Enter the id of the quiz you want to play: ");
-		int id = Integer.parseInt(System.console().readLine());
-		if (this.quizService.quizWithIdExists(id)) {
-			Quiz quiz = this.quizService.getQuizFromId(id);
-			for (Question q : quiz.getQuestions()) {
-				System.out.println(q.getText());
-				quizScore += this.getQuizQuestionAnswer(q);
-				// TODO this is putting the score and not the response
-				quizAnswers.put(q.getId(), this.getQuizQuestionAnswer(q));
+		int quizId = Integer.parseInt(System.console().readLine());
+		
+		/*
+		 * This loop contains the main functionality for checking whether offered answers
+		 * and also for keeping a record of all answers to questions.
+		 * 
+		 * Start by checking that there is a quiz with the given ID
+		 */
+		if (this.quizService.quizWithIdExists(quizId)) {
+			
+			// There is a matching quiz, so get the questions and then loop through them
+			Quiz quiz = this.quizService.getQuizFromId(quizId);
+			for (Question question : quiz.getQuestions()) {
+				// print out the text of the question
+				System.out.println(question.getText());
+				
+				// Prompt for a numeric answer to the question
+				answerId = this.getQuizQuestionAnswer(question);
+
+				// get the Answer object that matches the answerId
+				answer = question.getAnswerFromId(answerId);
+				
+				// answers have an score of 0 if wrong or 1 if correct
+				quizScore += answer.getScore();
+				
+				// add a questionId and the given answerId to the history
+				quizAnswers.put(question.getId(), answerId);
 			}
 			System.out.println("Score: " + quizScore);
 			Record record = new Record(this.quizService.getNextRecordId(), 0, quiz.getId(), quizAnswers, quizScore);
 			this.quizService.addRecord(record);
 			this.switcher();
 		} else {
-			System.out.println("Sorry, no quiz with ID \"" + id + "\" exists.\n");
+			System.out.println("Sorry, no quiz with ID \"" + quizId + "\" exists.\n");
 			this.switcher();
 		}
-	}
-
-	public void getTopScores() throws RemoteException {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -228,10 +249,16 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 			System.out.println(a.getId() + ". " + a.getText());
 		}
 		System.out.print("Answer: ");
-		int response = Integer.parseInt(System.console().readLine());
-		return question.getAnswerFromId(response).getScore();
+		int quizQuestionAnswerId = Integer.parseInt(System.console().readLine());
+		// return question.getAnswerFromId(response).getScore();
+		return quizQuestionAnswerId;
 	}
 	
+	public void getTopScores() throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/**
 	 * Show a list of recent play records
 	 */
