@@ -143,4 +143,10 @@ public interface QuizService extends Remote {
 	 * Save data to disk
 	 */
 	void flush();
+	
+	/**
+	 * Load data from disk
+	 */
+	void load();
+
 }

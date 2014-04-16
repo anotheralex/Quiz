@@ -1,7 +1,7 @@
-//package quiz
-
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -266,7 +266,30 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		}
 	}
 	
-	
+	/**
+	 * Load data from disk
+	 */
+	@SuppressWarnings("unchecked")
+	public void load() {
+		this.players = null;
+		
+		try {
+			FileInputStream fin = new FileInputStream("players.ser");
+			ObjectInputStream in = new ObjectInputStream(fin);
+			if (in instanceof List<?>) {
+				this.players = (List<Player>) in.readObject();
+				in.close();
+				fin.close();
+			}
+		} catch (IOException i) {
+			i.printStackTrace();
+		} catch (ClassNotFoundException c) {
+			System.out.println("Player list not found");
+			c.printStackTrace();
+			return;
+		}
+	}
+
 
 	
 }
