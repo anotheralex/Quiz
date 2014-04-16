@@ -1,5 +1,8 @@
 //package quiz
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -246,5 +249,24 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 			return this.history.subList(this.history.size() - 10, this.history.size());
 		}
 	}
+	
+	/**
+	 * Save data to disk
+	 */
+	public void flush() {
+		try {
+			FileOutputStream fout = new FileOutputStream("players.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(this.players);
+			out.close();
+			fout.close();
+			System.out.println("Player data saved to players.ser");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	
+
 	
 }

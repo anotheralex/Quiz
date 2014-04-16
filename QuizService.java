@@ -138,4 +138,9 @@ public interface QuizService extends Remote {
 	 * List is size 10 (or less if there are fewer than 10 records)
 	 */
 	List<Record> getRecentHistory() throws RemoteException;
+	
+	/**
+	 * Save data to disk
+	 */
+	void flush();
 }
