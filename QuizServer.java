@@ -276,11 +276,9 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		try {
 			FileInputStream fin = new FileInputStream("players.ser");
 			ObjectInputStream in = new ObjectInputStream(fin);
-			if (in instanceof List<?>) {
-				this.players = (List<Player>) in.readObject();
-				in.close();
-				fin.close();
-			}
+			this.players = (List<Player>) in.readObject();
+			in.close();
+			fin.close();
 		} catch (IOException i) {
 			i.printStackTrace();
 		} catch (ClassNotFoundException c) {
