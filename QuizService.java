@@ -169,4 +169,12 @@ public interface QuizService extends Remote {
 	 */
 	List<Record> loadHistory(String filename) throws RemoteException;
 
+	/**
+	 * Create a list of the most recent quiz play records for a specific quiz
+	 * List is size 10 (or less if there are fewer than 10 records)
+	 * 
+	 * @param quizId the ID of the quiz
+	 */
+	List<Record> getRecentHistory(int quizId) throws RemoteException;
+
 }

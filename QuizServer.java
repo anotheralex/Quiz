@@ -255,6 +255,22 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	}
 	
 	/**
+	 * Create a list of the most recent quiz play records for a specific quiz
+	 * List is size 10 (or less if there are fewer than 10 records)
+	 * 
+	 * @param quizId the ID of the quiz
+	 */
+	public List<Record> getRecentHistory(int quizId) throws RemoteException {
+		List<Record> quizHistory = new ArrayList<>();
+		for (Record r : this.history) {
+			if (r.getQuizID() == quizId) {
+				quizHistory.add(r);
+			}
+		}
+		return quizHistory;
+	}
+
+	/**
 	 * Save data to disk
 	 */
 	public void flush(String data) throws RemoteException {
