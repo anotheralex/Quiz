@@ -141,8 +141,10 @@ public interface QuizService extends Remote {
 	
 	/**
 	 * Save data to disk
+	 * 
+	 * @param data the List to write
 	 */
-	void flush() throws RemoteException;
+	void flush(String data) throws RemoteException;
 	
 	/**
 	 * Load data from disk

@@ -257,15 +257,38 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	/**
 	 * Save data to disk
 	 */
-	public void flush() throws RemoteException {
-		File file = new File("players.ser");
+	public void flush(String data) throws RemoteException {
+		File file = null;
+		Object obj = null;
+		
+		/*
+		 * Use a String passed from the client to determine what data to save
+		 * Initialize the variables as required to save the appropriate data
+		 */
+		switch (data) {
+			case "players":
+				file = new File("players.ser");
+				obj = this.players;
+				break;
+			case "quizzes":
+				file = new File("players.ser");
+				obj = this.quizzes;
+				break;
+			case "history":
+				file = new File("history.ser");
+				obj = this.history;
+				break;
+			default:
+				System.out.println("Unknown data source.");
+		}
+
 		try {
 			FileOutputStream fout = new FileOutputStream(file);
 			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(this.players);
+			out.writeObject(obj);
 			out.close();
 			fout.close();
-			System.out.println("Player data saved to players.ser");
+			System.out.println("Data saved.");
 		} catch (FileNotFoundException fex) {
 			System.out.println("Could not open file for writing.");
 		} catch (IOException ex) {
