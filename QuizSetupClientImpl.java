@@ -45,15 +45,13 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 * Display a menu with user options
 	 */
 	public void showMenu() {
-		System.out.println("QUIZ SETUP CLIENT MAIN MENU");
-		System.out.println("");
+		System.out.println("\nQUIZ SETUP CLIENT MAIN MENU\n");
 		System.out.println("Select one of the following options:");
 		System.out.println("1. Add new player");
 		System.out.println("2. Add new quiz");
 		System.out.println("3. Show current players");
 		System.out.println("4. Show current quizzes");
-		System.out.println("5. Quit");
-		System.out.println("");
+		System.out.println("5. Quit\n");
 		System.out.print("Option (1-5): ");
 	}
 
@@ -177,10 +175,9 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 */
 	public void showPlayers() throws RemoteException {
 		if (this.quizService.getPlayers().isEmpty()) {
-			System.out.println("No players yet.\n");
+			System.out.println("No players yet.");
 		} else {
-			System.out.println("");
-			System.out.println("All players");
+			System.out.println("\nAll players");
 			System.out.println("ID\tName");
 			for (Player p : this.quizService.getPlayers()) {
 				StringBuilder sb = new StringBuilder();
@@ -189,7 +186,6 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 				sb.append(p.getName());
 				System.out.println(sb.toString());
 			}
-			System.out.println("");
 		}
 	}
 
@@ -207,9 +203,9 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 */
 	public void showQuizzes() throws RemoteException {
 		if (this.quizService.getQuizzes().isEmpty()) {
-			System.out.println("No quizzes yet.\n");
+			System.out.println("No quizzes yet.");
 		} else {
-			System.out.println("All quizzes");
+			System.out.println("\nAll quizzes");
 			System.out.println("ID\tName");
 			for (Quiz q : this.quizService.getQuizzes()) {
 				StringBuilder sb = new StringBuilder();
