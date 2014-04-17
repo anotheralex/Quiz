@@ -12,3 +12,8 @@ Quiz comes with two clients: QuizSetupClient, for creating quizzes and adding pl
 
 To start QuizSetupClient, run the following command from the command line:
 - java -Djava.security.policy=client.policy QuizSetupClient
+
+To start QuizPlayerClient, run the following command from the command line:
+- java -Djava.security.policy=client.policy QuizPlayerClient
+
+Once the client is started, follow the onscreen instructions.
