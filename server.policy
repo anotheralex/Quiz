@@ -5,4 +5,7 @@ grant {
 	
 	// allow the server to read and write to the three data files
 	permission java.io.FilePermission "players.ser", "read,write";
+	permission java.io.FilePermission "quizzes.ser", "read,write";
+	permission java.io.FilePermission "history.ser", "read,write";
+	
 };
