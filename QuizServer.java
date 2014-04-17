@@ -273,7 +273,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	/**
 	 * Save data to disk
 	 */
-	public void flush(String data) throws RemoteException {
+	public synchronized void flush(String data) throws RemoteException {
 		File file = null;
 		Object obj = null;
 		
