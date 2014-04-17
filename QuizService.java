@@ -142,11 +142,11 @@ public interface QuizService extends Remote {
 	/**
 	 * Save data to disk
 	 */
-	void flush();
+	void flush() throws RemoteException;
 	
 	/**
 	 * Load data from disk
 	 */
-	void load();
+	List<Player> loadPlayers(String filename) throws RemoteException;
 
 }

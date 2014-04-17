@@ -1,4 +1,6 @@
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -32,11 +34,13 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	public QuizServer() throws RemoteException {
 		// next available ID for players, quizzes and records
 		this.quizId = 1;
-		this.playerId = 1;
 		this.recordId = 1;
 		
+		//this.players = new ArrayList<>();
+		this.players = this.loadPlayers("players.ser");
+		this.playerId = 1;
+		
 		this.quizzes = new ArrayList<>();
-		this.players = new ArrayList<>();
 		this.history = new ArrayList<>();
 	}
 
@@ -253,41 +257,49 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	/**
 	 * Save data to disk
 	 */
-	public void flush() {
+	public void flush() throws RemoteException {
+		File file = new File("players.ser");
 		try {
-			FileOutputStream fout = new FileOutputStream("players.ser");
+			FileOutputStream fout = new FileOutputStream(file);
 			ObjectOutputStream out = new ObjectOutputStream(fout);
 			out.writeObject(this.players);
 			out.close();
 			fout.close();
 			System.out.println("Player data saved to players.ser");
+		} catch (FileNotFoundException fex) {
+			System.out.println("Could not open file for writing.");
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
 	
 	/**
-	 * Load data from disk
+	 * Load player data from disk
+	 * 
+	 * @param filename the name of the file to load
+	 * @return players a List of Player objects
 	 */
 	@SuppressWarnings("unchecked")
-	public void load() {
-		this.players = null;
+	public List<Player> loadPlayers(String filename) throws RemoteException {
+		List<Player> players = new ArrayList<>();
 		
-		try {
-			FileInputStream fin = new FileInputStream("players.ser");
-			ObjectInputStream in = new ObjectInputStream(fin);
-			this.players = (List<Player>) in.readObject();
-			in.close();
-			fin.close();
-		} catch (IOException i) {
-			i.printStackTrace();
-		} catch (ClassNotFoundException c) {
-			System.out.println("Player list not found");
-			c.printStackTrace();
-			return;
+		File file = new File(filename);
+		if (file.exists()) {
+			try {
+				FileInputStream fin = new FileInputStream(file);
+				ObjectInputStream in = new ObjectInputStream(fin);
+				players = (List<Player>) in.readObject();
+				in.close();
+				fin.close();
+				System.out.println("Loaded players.");
+			} catch (IOException i) {
+				i.printStackTrace();
+			} catch (ClassNotFoundException c) {
+				System.out.println("Player list not found");
+				c.printStackTrace();
+			}
 		}
+		return players;					
 	}
 
-
-	
 }

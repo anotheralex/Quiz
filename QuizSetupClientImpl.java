@@ -80,6 +80,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			switch (choice) {
 				case 1:
 					this.addPlayer();
+					this.quizService.flush();
 					break;
 				case 2:
 					this.addQuiz();
