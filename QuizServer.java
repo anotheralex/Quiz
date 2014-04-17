@@ -32,16 +32,16 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	private List<Record> history;
 
 	public QuizServer() throws RemoteException {
-		// next available ID for players, quizzes and records
-		this.quizId = 1;
-		this.recordId = 1;
 		
 		//this.players = new ArrayList<>();
-		this.players = this.loadPlayers("players.ser");
+		this.players = this.loadPlayerData("players.ser");
 		this.playerId = 1;
 		
-		this.quizzes = new ArrayList<>();
-		this.history = new ArrayList<>();
+		this.quizzes = this.loadQuizData("quizzes.ser");
+		this.quizId = 1;
+
+		this.history = this.loadHistory("history.ser");
+		this.recordId = 1;
 	}
 
 	// TODO Functionality now in addQuiz(Quiz)
@@ -271,7 +271,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 				obj = this.players;
 				break;
 			case "quizzes":
-				file = new File("players.ser");
+				file = new File("quizzes.ser");
 				obj = this.quizzes;
 				break;
 			case "history":
@@ -303,7 +303,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 * @return players a List of Player objects
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Player> loadPlayers(String filename) throws RemoteException {
+	public List<Player> loadPlayerData(String filename) throws RemoteException {
 		List<Player> players = new ArrayList<>();
 		
 		File file = new File(filename);
@@ -323,6 +323,64 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 			}
 		}
 		return players;					
+	}
+
+	/**
+	 * Load player data from disk
+	 * 
+	 * @param filename the name of the file to load
+	 * @return players a List of Player objects
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Quiz> loadQuizData(String filename) throws RemoteException {
+		List<Quiz> quizzes = new ArrayList<>();
+		
+		File file = new File(filename);
+		if (file.exists()) {
+			try {
+				FileInputStream fin = new FileInputStream(file);
+				ObjectInputStream in = new ObjectInputStream(fin);
+				quizzes = (List<Quiz>) in.readObject();
+				in.close();
+				fin.close();
+				System.out.println("Loaded quizzes.");
+			} catch (IOException i) {
+				i.printStackTrace();
+			} catch (ClassNotFoundException c) {
+				System.out.println("Quiz list not found");
+				c.printStackTrace();
+			}
+		}
+		return quizzes;
+	}
+
+	/**
+	 * Load player data from disk
+	 * 
+	 * @param filename the name of the file to load
+	 * @return players a List of Player objects
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Record> loadHistory(String filename) throws RemoteException {
+		List<Record> history = new ArrayList<>();
+		
+		File file = new File(filename);
+		if (file.exists()) {
+			try {
+				FileInputStream fin = new FileInputStream(file);
+				ObjectInputStream in = new ObjectInputStream(fin);
+				history = (List<Record>) in.readObject();
+				in.close();
+				fin.close();
+				System.out.println("Loaded history.");
+			} catch (IOException i) {
+				i.printStackTrace();
+			} catch (ClassNotFoundException c) {
+				System.out.println("History not found");
+				c.printStackTrace();
+			}
+		}
+		return history;
 	}
 
 }

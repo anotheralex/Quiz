@@ -151,6 +151,22 @@ public interface QuizService extends Remote {
 	 * 
 	 * @param data a String representing the particular data to write to disk
 	 */
-	List<Player> loadPlayers(String filename) throws RemoteException;
+	List<Player> loadPlayerData(String filename) throws RemoteException;
+
+	/**
+	 * Load player data from disk
+	 * 
+	 * @param filename the name of the file to load
+	 * @return players a List of Player objects
+	 */
+	List<Quiz> loadQuizData(String filename) throws RemoteException;
+
+	/**
+	 * Load player data from disk
+	 * 
+	 * @param filename the name of the file to load
+	 * @return players a List of Player objects
+	 */
+	List<Record> loadHistory(String filename) throws RemoteException;
 
 }
