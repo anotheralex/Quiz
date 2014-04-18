@@ -52,8 +52,9 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 		System.out.println("2. Add new quiz");
 		System.out.println("3. Show current players");
 		System.out.println("4. Show current quizzes");
-		System.out.println("5. Quit\n");
-		System.out.print("Option (1-5): ");
+		System.out.println("5. Close quiz");
+		System.out.println("6. Quit\n");
+		System.out.print("Option (1-6): ");
 	}
 
 	/**
@@ -92,6 +93,9 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 					this.showQuizzes();
 					break;
 				case 5:
+					this.closeQuiz();
+					break;
+				case 6:
 					run = false;
 					break;
 				default:
@@ -199,16 +203,16 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	}
 	
 	/**
-	 * Show a list of all quizzes
+	 * Show a list of all live quizzes
 	 * @throws RemoteException 
 	 */
 	public void showQuizzes() throws RemoteException {
-		if (this.quizService.getQuizzes().isEmpty()) {
+		if (this.quizService.getLiveQuizzes().isEmpty()) {
 			System.out.println("No quizzes yet.");
 		} else {
 			System.out.println("\nAll quizzes");
 			System.out.println("ID\tName");
-			for (Quiz q : this.quizService.getQuizzes()) {
+			for (Quiz q : this.quizService.getLiveQuizzes()) {
 				StringBuilder sb = new StringBuilder();
 				sb.append(q.getId());
 				sb.append("\t");
@@ -225,13 +229,13 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	public void closeQuiz() throws RemoteException {
 		System.out.println("\nCurrent quizzes");
 		this.showQuizzes();
-		System.out.println("Please enter the ID of the quiz you wish to close: ");
+		System.out.print("\nPlease enter the ID of the quiz you wish to close: ");
 		int quizId = Integer.parseInt(System.console().readLine());
 		
 		List<Record> recentHistory = this.quizService.closeQuiz(quizId);
 		
 		if (recentHistory == null) {
-			System.out.println("Could not close quiz " + quizId);
+			System.out.println("\nCould not close quiz " + quizId);
 		} else {
 			// TODO add the date
 			System.out.println("Quiz " + quizId + " closed. The most recent plays are summarized below.");

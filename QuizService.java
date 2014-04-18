@@ -78,6 +78,13 @@ public interface QuizService extends Remote {
 	List<Quiz> getQuizzes() throws RemoteException;
 
 	/**
+	 * Get a list of all quizzes that are live
+	 *
+	 * @return players a List<Quiz> of players
+	 */
+	List<Quiz> getLiveQuizzes() throws RemoteException;
+
+	/**
 	 * Print a message to the console
 	 */
 	void printMessage(String message) throws RemoteException;

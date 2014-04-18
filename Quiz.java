@@ -66,4 +66,11 @@ public interface Quiz {
 	 * Close a quiz
 	 */
 	void close();
+	
+	/**
+	 * Getter for isActive
+	 * 
+	 * @return boolean true if active otherwise false
+	 */
+	boolean isLive();
 }

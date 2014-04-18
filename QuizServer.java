@@ -155,6 +155,21 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	}
 	
 	/**
+	 * Get a list of all quizzes that are live
+	 *
+	 * @return players a List<Quiz> of players
+	 */
+	public List<Quiz> getLiveQuizzes() throws RemoteException {
+		List<Quiz> liveQuizzes = new ArrayList<>();
+		for (Quiz q : this.quizzes) {
+			if (q.isLive()) {
+				liveQuizzes.add(q);
+			}
+		}
+		return liveQuizzes;
+	}
+	
+	/**
 	 * Print a status message to the console
 	 */
 	public void printMessage(String message) {
