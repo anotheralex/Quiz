@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,6 +31,9 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	// list of Record objects including the history of all quiz plays
 	private int recordId;
 	private List<Record> history;
+	
+	// Map used for serializing and deserializing IDs
+	private HashMap<String, Integer> idMap;
 
 	public QuizServer() throws RemoteException {
 		
@@ -332,6 +336,36 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+		
+		/*
+		 * flush all IDs to disk
+		 */
+		//this.flushIds();
+	}
+	
+	/**
+	 * Save data to disk
+	 */
+	// TODO check this and see if the logic works
+	private synchronized void flushIds() {
+		idMap = new HashMap<>();
+		idMap.put("playerId", this.playerId);
+		idMap.put("quizId", this.quizId);
+		idMap.put("recordId", this.recordId);
+		
+		try {
+			File file = new File("ids.ser");
+			FileOutputStream fout = new FileOutputStream(file);
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(idMap);
+			out.close();
+			fout.close();
+			System.out.println("Data saved.");
+		} catch (FileNotFoundException fex) {
+			System.out.println("Could not open file for writing.");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	/**
@@ -420,5 +454,36 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		}
 		return history;
 	}
+	
+	/**
+	 * Load IDs from disk
+	 * 
+	 * @param filename the name of the file to load
+	 * @return players a HashMap of the IDs in the system
+	 */
+	@SuppressWarnings("unchecked")
+	// TODO check this and see if the logic works
+	private HashMap<String, Integer> loadIdData(String filename) throws RemoteException {
+		HashMap<String, Integer> idMap = new HashMap<>();
+		
+		File file = new File(filename);
+		if (file.exists()) {
+			try {
+				FileInputStream fin = new FileInputStream(file);
+				ObjectInputStream in = new ObjectInputStream(fin);
+				idMap = (HashMap<String, Integer>) in.readObject();
+				in.close();
+				fin.close();
+				System.out.println("Loaded IDs.");
+			} catch (IOException i) {
+				i.printStackTrace();
+			} catch (ClassNotFoundException c) {
+				System.out.println("IDs not found");
+				c.printStackTrace();
+			}
+		}
+		return idMap;
+	}
+
 
 }
