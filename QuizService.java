@@ -36,8 +36,9 @@ public interface QuizService extends Remote {
 	 * Prints the name of the winner and all player details
 	 *
 	 * @param id the id of the quiz to close
+	 * @return List of recent records for the quoted quiz
 	 */
-	void closeQuiz(int id) throws RemoteException;
+	List<Record> closeQuiz(int id) throws RemoteException;
 
 	/**
 	 * Add a new player

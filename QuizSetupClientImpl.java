@@ -5,6 +5,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
+import java.util.List;
 
 /**
  * A client for setting up new quizzes
@@ -216,4 +217,30 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			}
 		}
 	}
+	
+	/**
+	 * Closes a quiz and prints the recent history of that quiz
+	 * Prompts for the ID of a quiz to close and then asks the server to shut down the quiz
+	 */
+	public void closeQuiz() throws RemoteException {
+		System.out.println("\nCurrent quizzes");
+		this.showQuizzes();
+		System.out.println("Please enter the ID of the quiz you wish to close: ");
+		int quizId = Integer.parseInt(System.console().readLine());
+		
+		List<Record> recentHistory = this.quizService.closeQuiz(quizId);
+		
+		if (recentHistory == null) {
+			System.out.println("Could not close quiz " + quizId);
+		} else {
+			// TODO add the date
+			System.out.println("Quiz " + quizId + " closed. The most recent plays are summarized below.");
+			System.out.println("Player\tScore");
+			for (Record r : recentHistory) {
+				System.out.println(r.getPlayerId() + "\t" + r.getQuizScore());
+			}
+		}
+		
+	}
+
 }

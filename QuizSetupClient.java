@@ -78,4 +78,11 @@ public interface QuizSetupClient {
 	 * @throws MalformedURLException 
 	 */
 	void launch() throws RemoteException, MalformedURLException, NotBoundException;
+	
+	/**
+	 * Closes a quiz and prints the recent history of that quiz
+	 * Prompts for the ID of a quiz to close and then asks the server to shut down the quiz
+	 */
+	void closeQuiz() throws RemoteException;
+
 }
