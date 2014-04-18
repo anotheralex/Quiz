@@ -37,15 +37,18 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 
 	public QuizServer() throws RemoteException {
 		
+		// get the saved IDs
+		this.idMap = this.loadIdData("ids.ser");
+		
 		//this.players = new ArrayList<>();
 		this.players = this.loadPlayerData("players.ser");
-		this.playerId = 1;
+		this.playerId = this.idMap.get("playerId");
 		
 		this.quizzes = this.loadQuizData("quizzes.ser");
-		this.quizId = 1;
+		this.quizId = this.idMap.get("quizId");
 
 		this.history = this.loadHistory("history.ser");
-		this.recordId = 1;
+		this.recordId = this.idMap.get("recordId");
 	}
 
 	// TODO Functionality now in addQuiz(Quiz)
@@ -340,7 +343,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		/*
 		 * flush all IDs to disk
 		 */
-		//this.flushIds();
+		this.flushIds();
 	}
 	
 	/**
@@ -348,6 +351,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 */
 	// TODO check this and see if the logic works
 	private synchronized void flushIds() {
+		// TODO this is creating a new Map each time data is saved potentially wasting space and GC time
 		idMap = new HashMap<>();
 		idMap.put("playerId", this.playerId);
 		idMap.put("quizId", this.quizId);
@@ -481,6 +485,10 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 				System.out.println("IDs not found");
 				c.printStackTrace();
 			}
+		} else {
+			idMap.put("playerId", 1);
+			idMap.put("quizId", 1);
+			idMap.put("recordId", 1);
 		}
 		return idMap;
 	}
