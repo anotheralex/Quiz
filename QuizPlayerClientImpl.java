@@ -22,9 +22,9 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 	}
 	
 	public void launch() throws RemoteException, MalformedURLException, NotBoundException {
-		System.out.println("Connecting to server...");
+		System.out.print("Connecting to server...");
 		this.connect();
-		System.out.println("Connected to server.");
+		System.out.println("connected.");
 		this.switcher();
 	}
 		
