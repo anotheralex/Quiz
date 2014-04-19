@@ -202,4 +202,12 @@ public interface QuizService extends Remote {
 	 */
 	List<Record> getRecentHistory(int quizId) throws RemoteException;
 
+	/**
+	 * Get the title of the Quiz object associated with an ID
+	 * 
+	 * @param id the ID of a quiz
+	 * @return the title of the Quiz object with ID
+	 */
+	String getQuizTitleFromId(int id) throws RemoteException;
+
 }

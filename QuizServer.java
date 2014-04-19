@@ -233,7 +233,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	/**
 	 * Get the Quiz object associated with an ID
 	 * 
-	 * @param id the ID of a quiz
+	 * @param id the ID of a player
 	 * @return player the Player object with ID id
 	 * or null if there is no matching player
 	 */
@@ -244,6 +244,21 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Get the title of the Quiz object associated with an ID
+	 * 
+	 * @param id the ID of a quiz
+	 * @return the title of the Quiz object with ID
+	 */
+	public String getQuizTitleFromId(int id) throws RemoteException {
+		for (Quiz quiz : this.quizzes) {
+			if (quiz.getId() == id) {
+				return quiz.getTitle();
+			}
+		}
+		return "";
 	}
 
 
