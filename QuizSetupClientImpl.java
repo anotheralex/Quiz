@@ -134,7 +134,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 		this.quizService.addPlayer(newPlayer);
 		
 		System.out.println("Player added.\n");
-		quizService.printMessage("Player added.");
+		this.quizService.printMessage("New player added (ID: " + newPlayer.getId() + "; Username: " + newPlayer.getName() + ")");
 
 		return newPlayer.getId();
 	}
@@ -166,7 +166,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			newQuiz = new QuizImpl(this.quizService.getNextQuizId(), title);
 			newQuiz.addQuestions();
 			this.quizService.addQuiz(newQuiz);
-			this.quizService.printMessage("Quiz added.");
+			this.quizService.printMessage("New quiz added (ID: " + newQuiz.getId() + "; Title: " + newQuiz.getTitle() + ")");
 			return newQuiz.getId();
 		} catch (RemoteException e) {
 			e.printStackTrace();

@@ -332,7 +332,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 			out.writeObject(obj);
 			out.close();
 			fout.close();
-			System.out.println("Data saved.");
+			System.out.println("Object data saved.");
 		} catch (FileNotFoundException fex) {
 			System.out.println("Could not open file for writing.");
 		} catch (IOException ex) {
@@ -363,7 +363,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 			out.writeObject(idMap);
 			out.close();
 			fout.close();
-			System.out.println("Data saved.");
+			System.out.println("ID data saved.");
 		} catch (FileNotFoundException fex) {
 			System.out.println("Could not open file for writing.");
 		} catch (IOException ex) {
@@ -389,7 +389,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 				players = (List<Player>) in.readObject();
 				in.close();
 				fin.close();
-				System.out.println("Loaded players from file " + filename + ".");
+				System.out.print("..loaded players.");
 			} catch (IOException i) {
 				i.printStackTrace();
 			} catch (ClassNotFoundException c) {
@@ -418,7 +418,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 				quizzes = (List<Quiz>) in.readObject();
 				in.close();
 				fin.close();
-				System.out.println("Loaded quizzes from file " + filename + ".");
+				System.out.print("..loaded quizzes.");
 			} catch (IOException i) {
 				i.printStackTrace();
 			} catch (ClassNotFoundException c) {
@@ -447,7 +447,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 				history = (List<Record>) in.readObject();
 				in.close();
 				fin.close();
-				System.out.println("Loaded history from file " + filename + ".");
+				System.out.print("..loaded history.");
 			} catch (IOException i) {
 				i.printStackTrace();
 			} catch (ClassNotFoundException c) {
@@ -480,7 +480,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 				map = (HashMap<String, Integer>) in.readObject();
 				in.close();
 				fin.close();
-				System.out.println("Loaded IDs from file " + filename + ".");
+				System.out.print("..loaded IDs.");
 			} catch (IOException i) {
 				i.printStackTrace();
 			} catch (ClassNotFoundException c) {

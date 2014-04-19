@@ -7,5 +7,6 @@ grant {
 	permission java.io.FilePermission "players.ser", "read,write";
 	permission java.io.FilePermission "quizzes.ser", "read,write";
 	permission java.io.FilePermission "history.ser", "read,write";
+	permission java.io.FilePermission "ids.ser", "read,write";
 	
 };

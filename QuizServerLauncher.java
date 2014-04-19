@@ -41,7 +41,6 @@ public class QuizServerLauncher {
 			Naming.rebind(registryHost + serviceName, service);
 			
 			System.out.println("done.");
-			System.out.println("");
 			System.out.println("Activity summary:");
 
 		} catch (MalformedURLException ex) {
