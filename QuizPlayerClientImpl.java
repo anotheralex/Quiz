@@ -196,6 +196,9 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		int quizScore = 0;
 		int answerId = 0;
 		Answer answer;
+
+		// make sure that there is a valid Player playing
+		this.setPlayer();
 		
 		// quizAnswers holds hold history of the questions and the answers given to each question
 		Map<Integer, Integer> quizAnswers = new HashMap<>();
