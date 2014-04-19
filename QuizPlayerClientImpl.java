@@ -87,7 +87,6 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 					this.showQuizzes();
 					break;
 				case 4:
-					this.showQuizzes();
 					this.playQuiz();
 					break;
 				case 5:
@@ -202,6 +201,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		Map<Integer, Integer> quizAnswers = new HashMap<>();
 		
 		// prompt for an integer ID of the quiz to be played
+		this.showQuizzes();
 		System.out.print("Enter the id of the quiz you want to play: ");
 		int quizId = Integer.parseInt(System.console().readLine());
 		
