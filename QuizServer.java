@@ -37,10 +37,9 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 
 	public QuizServer() throws RemoteException {
 		
-		// get the saved IDs
+		// get the saved IDs or enter default values if no previous data
 		this.idMap = this.loadIdData("ids.ser");
 		
-		//this.players = new ArrayList<>();
 		this.players = this.loadPlayerData("players.ser");
 		this.playerId = this.idMap.get("playerId");
 		
@@ -390,11 +389,11 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 				players = (List<Player>) in.readObject();
 				in.close();
 				fin.close();
-				System.out.println("Loaded players.");
+				System.out.println("Loaded players from file " + filename + ".");
 			} catch (IOException i) {
 				i.printStackTrace();
 			} catch (ClassNotFoundException c) {
-				System.out.println("Player list not found");
+				System.out.println("No player list found. Using defaults.");
 				c.printStackTrace();
 			}
 		}
@@ -419,11 +418,11 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 				quizzes = (List<Quiz>) in.readObject();
 				in.close();
 				fin.close();
-				System.out.println("Loaded quizzes.");
+				System.out.println("Loaded quizzes from file " + filename + ".");
 			} catch (IOException i) {
 				i.printStackTrace();
 			} catch (ClassNotFoundException c) {
-				System.out.println("Quiz list not found");
+				System.out.println("No quiz list found. Using defaults.");
 				c.printStackTrace();
 			}
 		}
@@ -448,11 +447,11 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 				history = (List<Record>) in.readObject();
 				in.close();
 				fin.close();
-				System.out.println("Loaded history.");
+				System.out.println("Loaded history from file " + filename + ".");
 			} catch (IOException i) {
 				i.printStackTrace();
 			} catch (ClassNotFoundException c) {
-				System.out.println("History not found");
+				System.out.println("No history found.");
 				c.printStackTrace();
 			}
 		}
@@ -463,22 +462,25 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 * Load IDs from disk
 	 * 
 	 * @param filename the name of the file to load
-	 * @return players a HashMap of the IDs in the system
+	 * @return a HashMap of the three types of IDs tracked by the server
 	 */
 	@SuppressWarnings("unchecked")
-	// TODO check this and see if the logic works
 	private HashMap<String, Integer> loadIdData(String filename) throws RemoteException {
-		HashMap<String, Integer> idMap = new HashMap<>();
+		HashMap<String, Integer> map = new HashMap<>();
 		
+		/*
+		 * First check to see if there if the file filename exists and
+		 * if it does, import the HashMap containing the three ID ints
+		 */
 		File file = new File(filename);
 		if (file.exists()) {
 			try {
 				FileInputStream fin = new FileInputStream(file);
 				ObjectInputStream in = new ObjectInputStream(fin);
-				idMap = (HashMap<String, Integer>) in.readObject();
+				map = (HashMap<String, Integer>) in.readObject();
 				in.close();
 				fin.close();
-				System.out.println("Loaded IDs.");
+				System.out.println("Loaded IDs from file " + filename + ".");
 			} catch (IOException i) {
 				i.printStackTrace();
 			} catch (ClassNotFoundException c) {
@@ -486,11 +488,15 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 				c.printStackTrace();
 			}
 		} else {
-			idMap.put("playerId", 1);
-			idMap.put("quizId", 1);
-			idMap.put("recordId", 1);
+			/*
+			 * If the file does not exist, enter the default values to start a new session
+			 */
+			//System.out.println("No previous IDs found. Starting with default values.");
+			map.put("playerId", 1);
+			map.put("quizId", 1);
+			map.put("recordId", 1);
 		}
-		return idMap;
+		return map;
 	}
 
 
