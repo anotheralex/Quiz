@@ -68,6 +68,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 */
 	public synchronized void addQuiz(Quiz quiz) throws RemoteException {
 		this.quizzes.add(quiz);
+		this.flush("quizzes");
 	}
 	
 	/**
@@ -118,8 +119,9 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 *
 	 * @param player the Player object to add
 	 */
-	public synchronized void addPlayer(Player player) {
+	public synchronized void addPlayer(Player player) throws RemoteException {
 		this.players.add(player);
+		this.flush("players");
 	}
 
 	// TODO This functionality is now in QuizSetupClient.showQuizzes()
@@ -213,6 +215,38 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		return false;
 	}
 
+	/**
+	 * Check if a player with a given ID exists
+	 * 
+	 * @param id the ID of the player
+	 * @return true if player exists otherwise false
+	 */
+	public boolean playerWithIdExists(int id) throws RemoteException {
+		for (Player player : this.players) {
+			if (player.getId() == id) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Get the Quiz object associated with an ID
+	 * 
+	 * @param id the ID of a quiz
+	 * @return player the Player object with ID id
+	 * or null if there is no matching player
+	 */
+	public Player getPlayerFromId(int id) throws RemoteException {
+		for (Player player : this.players) {
+			if (player.getId() == id) {
+				return player;
+			}
+		}
+		return null;
+	}
+
+
 	// TODO This method is now deprecated and the functionality is in QuizSetupClient
 	/**
 	 * Add questions to a specific quiz
@@ -266,8 +300,9 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 * Create a record from a quiz play
 	 * @param record the Record object to store
 	 */
-	public synchronized void addRecord(Record record) {
+	public synchronized void addRecord(Record record) throws RemoteException {
 		this.history.add(record);
+		this.flush("history");
 	}
 	
 	/**

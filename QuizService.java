@@ -107,6 +107,23 @@ public interface QuizService extends Remote {
 	boolean quizWithIdExists(int id) throws RemoteException;
 	
 	/**
+	 * Check if a player with a given ID exists
+	 * 
+	 * @param id the ID of the player
+	 * @return true if player exists otherwise false
+	 */
+	boolean playerWithIdExists(int id) throws RemoteException;
+	
+	/**
+	 * Get the Quiz object associated with an ID
+	 * 
+	 * @param id the ID of a quiz
+	 * @return player the Player object with ID id
+	 * or null if there is no matching player
+	 */
+	Player getPlayerFromId(int id) throws RemoteException;
+
+	/**
 	 * Add a question to a specific quiz
 	 * 
 	 * @param id the  ID of the quiz to add the question to

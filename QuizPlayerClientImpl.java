@@ -11,6 +11,7 @@ import java.util.Map;
 public class QuizPlayerClientImpl implements QuizPlayerClient {
 
 	private QuizService quizService;
+	private Player player;
 	
 	public static void main(String[] args) throws MalformedURLException, NotBoundException {
 		QuizPlayerClient qp = new QuizPlayerClientImpl();
@@ -50,8 +51,9 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		System.out.println("3. Show current quizzes");
 		System.out.println("4. Play quiz");
 		System.out.println("5. Show recent history");
-		System.out.println("6. Quit\n");
-		System.out.print("Option (1-6): ");
+		System.out.println("6. Select player");
+		System.out.println("7. Quit\n");
+		System.out.print("Option (1-7): ");
 	}
 
 	/**
@@ -92,6 +94,9 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 					this.showRecentHistory();
 					break;
 				case 6:
+					this.setPlayer();
+					break;
+				case 7:
 					run = false;
 					break;
 				default:
@@ -227,7 +232,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 				quizAnswers.put(question.getId(), answerId);
 			}
 			System.out.println("Score: " + quizScore);
-			Record record = new Record(this.quizService.getNextRecordId(), 0, quiz.getId(), quizAnswers, quizScore);
+			Record record = new Record(this.quizService.getNextRecordId(), this.player.getId(), quiz.getId(), quizAnswers, quizScore);
 			this.quizService.addRecord(record);
 			this.quizService.flush("history");
 			this.quizService.printMessage("New record added (ID: " + record.getRecordId() + ")");
@@ -282,4 +287,49 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		
 	}
 
+	/**
+	 * Select a player to play as
+	 * This is stored in a member field but can be changed at any time
+	 * 
+	 * @return the Player object of the selected player
+	 * @throws RemoteException 
+	 */
+	public Player selectExistingPlayer() throws RemoteException {
+		int id;
+		
+		do {
+			this.showPlayers();
+			System.out.print("\nEnter player ID: ");
+			id = Integer.parseInt(System.console().readLine());
+		} while (!this.quizService.playerWithIdExists(id));
+		
+		return this.quizService.getPlayerFromId(id);
+	}
+	
+	/**
+	 * Set the Player for the session
+	 */
+	public void setPlayer() throws RemoteException {
+		String response;
+		
+		do {
+			System.out.print("\nHit n to create a new player or e to choose from the player list: ");
+			response = System.console().readLine();
+
+			switch (response) {
+			case "n":
+				int newPlayerId = this.addPlayer();
+				this.player = this.quizService.getPlayerFromId(newPlayerId);
+				break;
+			case "e":
+				this.player = this.selectExistingPlayer();
+				break;
+			default:
+				System.out.print("Invalid option. Please try again.");
+			}
+
+		} while (!(response.equals("n") || response.equals("e")));
+		
+		System.out.println("You are playing as " + this.player.getName() + " (ID: " + this.player.getId() + ")");
+	}
 }
