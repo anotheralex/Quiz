@@ -1,7 +1,7 @@
 Quiz
 ====
 
-Quiz is a command line quiz system built in Java that uses Java's RMI protocol for network communication.
+Quiz is a command line quiz app built in Java and using Remote Method Invocation for network communication.
 
 ### Instructions
 
@@ -27,4 +27,4 @@ Once the client is started, follow the onscreen instructions to enter players an
 ### Notes
 Quiz was written and tested under Mac OS X Lion (10.7.5). The code was written in Eclipse (Kepler Service Release 2) with the apps tested in Terminal.app.
 
-Server data is saved in a series of .ser files. These can be deleted to reset the system to its initial state. The files provided include a Guest player and a sample quiz.
+Server data is saved in a series of `.ser` files. These can be deleted to reset the system to its initial state. The files provided include a Guest player and a sample quiz.
