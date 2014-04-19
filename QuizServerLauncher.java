@@ -9,12 +9,10 @@ public class QuizServerLauncher {
 	public static void main(String[] args) {
 		System.out.print("Setting up the Quiz Service.");
 		QuizServerLauncher app = new QuizServerLauncher();
-		System.out.print(".");
 		app.launch();
 	}
 
 	private void launch() {
-		System.out.print(".");
 		/*
 		 * Check if there is a  security manager running
 		 * If there is not, start one
@@ -31,7 +29,6 @@ public class QuizServerLauncher {
 			 */
 			LocateRegistry.createRegistry(1099);
 			
-			System.out.print(".");	
 			QuizService service = new QuizServer();
 
 			String registryHost = "//localhost/";
@@ -40,7 +37,7 @@ public class QuizServerLauncher {
 			System.out.print(".");
 			Naming.rebind(registryHost + serviceName, service);
 			
-			System.out.println("done.");
+			System.out.println(".done.");
 			System.out.println("Activity summary:");
 
 		} catch (MalformedURLException ex) {

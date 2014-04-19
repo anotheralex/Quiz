@@ -19,7 +19,6 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 		try {
 			qs.launch();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -133,7 +132,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 		Player newPlayer = new PlayerImpl(playerId, name);
 		this.quizService.addPlayer(newPlayer);
 		
-		System.out.println("Player added.\n");
+		System.out.println("Player added.");
 		this.quizService.printMessage("New player added (ID: " + newPlayer.getId() + "; Username: " + newPlayer.getName() + ")");
 
 		return newPlayer.getId();
@@ -208,7 +207,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 */
 	public void showQuizzes() throws RemoteException {
 		if (this.quizService.getLiveQuizzes().isEmpty()) {
-			System.out.println("No quizzes yet.");
+			System.out.println("No quizzes available.");
 		} else {
 			System.out.println("\nAll quizzes");
 			System.out.println("ID\tName");

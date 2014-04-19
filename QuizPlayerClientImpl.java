@@ -88,6 +88,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 				case 4:
 					this.showQuizzes();
 					this.playQuiz();
+					break;
 				case 5:
 					this.showRecentHistory();
 					break;
@@ -95,8 +96,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 					run = false;
 					break;
 				default:
-					System.out.println("Invalid option. PLease try again.");
-					System.out.println("");
+					System.out.println("Invalid option. Please try again.\n");
 			}
 		}
 	}
@@ -118,7 +118,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 
 	/**
 	 * Add a new player
-	 * Players have a unique username and an ID
+	 * Players have unique usernames and an ID
 	 * 
 	 * @return playerId the ID of the newly created player
 	 * @throws RemoteException 
@@ -131,7 +131,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		this.quizService.addPlayer(newPlayer);
 		
 		System.out.println("Player added.");
-		quizService.printMessage("Player added.");
+		this.quizService.printMessage("New player added (ID: " + newPlayer.getId() + "; Username: " + newPlayer.getName() + ")");
 
 		return newPlayer.getId();
 	}
@@ -230,10 +230,12 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 			System.out.println("Score: " + quizScore);
 			Record record = new Record(this.quizService.getNextRecordId(), 0, quiz.getId(), quizAnswers, quizScore);
 			this.quizService.addRecord(record);
-			this.switcher();
+			this.quizService.flush("history");
+			this.quizService.printMessage("New record added (ID: " + record.getRecordId() + ")");
+			//this.switcher();
 		} else {
 			System.out.println("Sorry, no quiz with ID \"" + quizId + "\" exists.\n");
-			this.switcher();
+			//this.switcher();
 		}
 	}
 
