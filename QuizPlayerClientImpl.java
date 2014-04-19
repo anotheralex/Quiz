@@ -17,7 +17,6 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		try {
 			qp.launch();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -269,7 +268,6 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		try {
 			recent = this.quizService.getRecentHistory();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

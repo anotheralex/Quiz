@@ -122,7 +122,7 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		this.players.add(player);
 	}
 
-	// TODO This functionality is now in QuizSetupClient.showQUixxes()
+	// TODO This functionality is now in QuizSetupClient.showQuizzes()
 	/**
 	 * List all available quizzes
 	 */
@@ -348,9 +348,8 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	/**
 	 * Save data to disk
 	 */
-	// TODO check this and see if the logic works
 	private synchronized void flushIds() {
-		// TODO this is creating a new Map each time data is saved potentially wasting space and GC time
+		// Note: this is creating a new Map each time data is saved potentially wasting space and GC time
 		idMap = new HashMap<>();
 		idMap.put("playerId", this.playerId);
 		idMap.put("quizId", this.quizId);
