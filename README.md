@@ -18,7 +18,7 @@ To start QuizPlayerClient, run the following command from the command line:
 
 Once the client is started, follow the onscreen instructions to enter players and enter and play quizzes and see the recent quiz play history.
 
-# Notes
+#### Notes
 Quiz has been tested on OS X 10.7.5 with apps running successfully in Terminal.app.
 
 Server data is saved in a series of .ser files. These can be deleted to reset the system to its initial state. The files provided include a Guest player and a sample quiz.
