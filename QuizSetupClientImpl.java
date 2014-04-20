@@ -245,48 +245,51 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 */
 	public void closeQuiz() throws RemoteException {
 		this.showQuizzes();
-		System.out.print("\nPlease enter the ID of the quiz you wish to close: ");
-		int quizId = Integer.parseInt(System.console().readLine());
+		List<Quiz> availableQuizzes = this.quizService.getLiveQuizzes();
 		
-		int topScore = this.quizService.getQuizTopScore(quizId);
-		List<Player> topPlayers = this.quizService.getQuizTopPlayers(quizId);
-		
-		List<Record> recentHistory = this.quizService.closeQuiz(quizId);
-		
-		if (recentHistory == null) {
-			System.out.println("\nCould not close quiz " + quizId);
-		} else if (recentHistory.size() == 0) {
-			System.out.println("\nQuiz " + quizId + " has not been played.");
-		} else {
-			// TODO add the date
-			System.out.println("\nQuiz " + quizId + " closed.");
-			System.out.println("\nTop Score: " + topScore);
-			System.out.println("\nTop Players");
-			System.out.println("----------------");
-			for (Player player : topPlayers) {
-				System.out.println(player.getName());
-			}
+		if (availableQuizzes.size() > 0) {
+			System.out.print("\nPlease enter the ID of the quiz you wish to close: ");
+			int quizId = Integer.parseInt(System.console().readLine());
 			
-			System.out.println("\nRecent play history.\n");
-			//System.out.println("Player\tScore");
-			System.out.printf("%-16s  %-5s\n",
-					"Player",
-					"Score"
-					);
-			System.out.printf("%-16s  %-5s\n",
-					"----------------",
-					"-----"
-					);
+			int topScore = this.quizService.getQuizTopScore(quizId);
+			List<Player> topPlayers = this.quizService.getQuizTopPlayers(quizId);
 			
-			for (Record record : recentHistory) {
-				//System.out.println(this.quizService.getPlayerFromId(r.getPlayerId()).getName() + "\t" + r.getQuizScore());
+			List<Record> recentHistory = this.quizService.closeQuiz(quizId);
+			
+			if (recentHistory == null) {
+				System.out.println("\nCould not close quiz " + quizId);
+			} else if (recentHistory.size() == 0) {
+				System.out.println("\nQuiz " + quizId + " has not been played.");
+			} else {
+				// TODO add the date
+				System.out.println("\nQuiz " + quizId + " closed.");
+				System.out.println("\nTop Score: " + topScore);
+				System.out.println("\nTop Players");
+				System.out.println("----------------");
+				for (Player player : topPlayers) {
+					System.out.println(player.getName());
+				}
+				
+				System.out.println("\nRecent play history.\n");
+				//System.out.println("Player\tScore");
 				System.out.printf("%-16s  %-5s\n",
-						this.quizService.getPlayerFromId(record.getPlayerId()).getName(),
-						record.getQuizScore()
+						"Player",
+						"Score"
 						);
+				System.out.printf("%-16s  %-5s\n",
+						"----------------",
+						"-----"
+						);
+				
+				for (Record record : recentHistory) {
+					//System.out.println(this.quizService.getPlayerFromId(r.getPlayerId()).getName() + "\t" + r.getQuizScore());
+					System.out.printf("%-16s  %-5s\n",
+							this.quizService.getPlayerFromId(record.getPlayerId()).getName(),
+							record.getQuizScore()
+							);
+				}
 			}
 		}
-		
 	}
 
 }
