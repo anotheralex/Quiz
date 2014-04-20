@@ -123,9 +123,10 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		this.flush("players");
 	}
 
-	// TODO This functionality is now in QuizSetupClient.showQuizzes()
 	/**
 	 * List all available quizzes
+	 * 
+	 * Note: This functionality is now in QuizSetupClient.showQuizzes()
 	 */
 	public void listQuizzes() {
 		if (this.quizzes.isEmpty()) {
@@ -260,10 +261,10 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		return "";
 	}
 
-
-	// TODO This method is now deprecated and the functionality is in QuizSetupClient
 	/**
 	 * Add questions to a specific quiz
+	 * 
+	 * Note: This method is now deprecated and the functionality is in QuizSetupClient
 	 * 
 	 * @param id the ID of the quiz to add the questions to
 	 * @return true if successfully added and false otherwise
