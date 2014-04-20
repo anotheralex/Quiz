@@ -264,10 +264,8 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 			this.quizService.addRecord(record);
 			this.quizService.flush("history");
 			this.quizService.printMessage("New record added (ID: " + record.getRecordId() + ")");
-			//this.switcher();
 		} else {
 			System.out.println("Sorry, no quiz with ID \"" + quizId + "\" exists.\n");
-			//this.switcher();
 		}
 	}
 
@@ -303,7 +301,6 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		if (recent.size() == 0) {
 			System.out.println("Sorry, no history to display.");
 		} else {
-			//System.out.println("Quiz ID\tQuiz Title\tPlayer\tQuiz Score");
 			System.out.printf("%-7s  %-32s  %-16s  %-10s\n",
 					"Quiz ID",
 					"Quiz Title",
@@ -318,17 +315,6 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 					);
 
 			for (Record r : recent) {
-				/*
-				StringBuilder sb = new StringBuilder();
-				sb.append(r.getQuizID());
-				sb.append("\t");
-				sb.append(this.quizService.getQuizTitleFromId(r.getQuizID()));
-				sb.append("\t");
-				sb.append(this.quizService.getPlayerFromId(r.getPlayerId()).getName());
-				sb.append("\t");
-				sb.append(r.getQuizScore());
-				System.out.println(sb.toString());
-				*/
 				System.out.printf("%-7s  %-32s  %-16s  %-10s\n",
 						r.getQuizID(),
 						this.quizService.getQuizTitleFromId(r.getQuizID()),
