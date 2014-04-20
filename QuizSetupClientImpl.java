@@ -244,7 +244,6 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	 * Prompts for the ID of a quiz to close and then asks the server to shut down the quiz
 	 */
 	public void closeQuiz() throws RemoteException {
-		System.out.println("\nCurrent quizzes");
 		this.showQuizzes();
 		System.out.print("\nPlease enter the ID of the quiz you wish to close: ");
 		int quizId = Integer.parseInt(System.console().readLine());
@@ -261,8 +260,9 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 		} else {
 			// TODO add the date
 			System.out.println("\nQuiz " + quizId + " closed.");
-			System.out.println("Top Score: " + topScore);
-			System.out.println("Top Players:");
+			System.out.println("\nTop Score: " + topScore);
+			System.out.println("\nTop Players");
+			System.out.println("-----------");
 			for (Player player : topPlayers) {
 				System.out.println(player.getName());
 			}

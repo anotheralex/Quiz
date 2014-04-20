@@ -9,7 +9,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A quiz server that serves the QuizService service to remote clients
@@ -89,11 +91,15 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 * or null if the quiz does not exist
 	 */
 	public synchronized List<Record> closeQuiz(int id) throws RemoteException  {
-		List<Record> closeOutHistory = new ArrayList<>();
+		List<Record> closeOutHistory = null;
+		Quiz quiz;
 		if (this.quizWithIdExists(id)) {
-			this.getQuizFromId(id).close();
+			closeOutHistory = new ArrayList<>();
+			quiz = this.getQuizFromId(id);
 			closeOutHistory = this.getRecentHistory(id);
+			quiz.close();
 		}
+		this.flush("quizzes");
 		return closeOutHistory;
 	}
 
@@ -556,14 +562,16 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	 * @return a list of players who got the top score
 	 */
 	public List<Player> getQuizTopPlayers(int id) throws RemoteException {
-		List<Player> topPlayers = new ArrayList<>();
+		Set<Player> topPlayerSet = new HashSet<>();
 		int topScore = this.getQuizTopScore(id);
 		
 		for (Record record : this.history) {
 			if (record.getQuizID() == id && record.getQuizScore() == topScore) {
-				topPlayers.add(this.getPlayerFromId(record.getPlayerId()));
+				topPlayerSet.add(this.getPlayerFromId(record.getPlayerId()));
 			}
 		}
+		
+		List<Player> topPlayers = new ArrayList<>(topPlayerSet); 
 		
 		return topPlayers;
 	}
