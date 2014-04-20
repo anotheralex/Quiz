@@ -198,6 +198,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		Answer answer;
 
 		// make sure that there is a valid Player playing
+		System.out.println("Please choose a player.");
 		this.setPlayer();
 		
 		// quizAnswers holds hold history of the questions and the answers given to each question
@@ -205,7 +206,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		
 		// prompt for an integer ID of the quiz to be played
 		this.showQuizzes();
-		System.out.print("Enter the id of the quiz you want to play: ");
+		System.out.print("\nEnter the id of the quiz you want to play: ");
 		int quizId = Integer.parseInt(System.console().readLine());
 		
 		/*
@@ -271,13 +272,8 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 	/**
 	 * Show a list of recent play records
 	 */
-	public void showRecentHistory() {
-		List<Record> recent = null;
-		try {
-			recent = this.quizService.getRecentHistory();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+	public void showRecentHistory() throws RemoteException {
+		List<Record> recent = this.quizService.getRecentHistory();
 		
 		if (recent.size() == 0) {
 			System.out.println("Sorry, no history to display.");
