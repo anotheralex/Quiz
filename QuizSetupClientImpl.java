@@ -262,15 +262,28 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			System.out.println("\nQuiz " + quizId + " closed.");
 			System.out.println("\nTop Score: " + topScore);
 			System.out.println("\nTop Players");
-			System.out.println("-----------");
+			System.out.println("----------------");
 			for (Player player : topPlayers) {
 				System.out.println(player.getName());
 			}
 			
-			System.out.println("\nRecent play history.");
-			System.out.println("Player\tScore");
-			for (Record r : recentHistory) {
-				System.out.println(this.quizService.getPlayerFromId(r.getPlayerId()) + "\t" + r.getQuizScore());
+			System.out.println("\nRecent play history.\n");
+			//System.out.println("Player\tScore");
+			System.out.printf("%-16s  %-5s\n",
+					"Player",
+					"Score"
+					);
+			System.out.printf("%-16s  %-5s\n",
+					"----------------",
+					"-----"
+					);
+			
+			for (Record record : recentHistory) {
+				//System.out.println(this.quizService.getPlayerFromId(r.getPlayerId()).getName() + "\t" + r.getQuizScore());
+				System.out.printf("%-16s  %-5s\n",
+						this.quizService.getPlayerFromId(record.getPlayerId()).getName(),
+						record.getQuizScore()
+						);
 			}
 		}
 		
