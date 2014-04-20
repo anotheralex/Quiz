@@ -171,21 +171,29 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 	}
 
 	/**
-	 * Show a list of all quizzes
+	 * Show a list of all live quizzes
 	 * @throws RemoteException 
 	 */
 	public void showQuizzes() throws RemoteException {
-		if (this.quizService.getQuizzes().isEmpty()) {
-			System.out.println("No quizzes yet.");
+		if (this.quizService.getLiveQuizzes().isEmpty()) {
+			System.out.println("No quizzes available.");
 		} else {
-			System.out.println("\nAll quizzes");
-			System.out.println("ID\tName");
-			for (Quiz q : this.quizService.getQuizzes()) {
-				StringBuilder sb = new StringBuilder();
-				sb.append(q.getId());
-				sb.append("\t");
-				sb.append(q.getTitle());
-				System.out.println(sb.toString());
+			System.out.println("\nAll Quizzes\n");
+			
+			System.out.printf("%-7s  %-32s\n",
+					"Quiz ID",
+					"Quiz Title"
+					);
+			System.out.printf("%-7s  %-32s\n",
+					"-------",
+					"--------------------------------"
+					);
+			
+			for (Quiz q : this.quizService.getLiveQuizzes()) {
+				System.out.printf("%-7s  %-32s\n",
+						q.getId(),
+						q.getTitle()
+						);
 			}
 		}
 	}
