@@ -184,6 +184,11 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		}
 	}
 
+	/**
+	 * Show the questions included in a specified quiz
+	 * 
+	 * @param id the ID of the quiz
+	 */
 	public void showQuizQuestions(int id) throws RemoteException {
 		Quiz quiz = this.quizService.getQuizFromId(id);
 		for (Question q : quiz.getQuestions()) {
@@ -240,7 +245,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 				// add a questionId and the given answerId to the history
 				quizAnswers.put(question.getId(), answerId);
 			}
-			System.out.println("Score: " + quizScore);
+			System.out.println("\nFinal Score: " + quizScore);
 			Record record = new Record(this.quizService.getNextRecordId(), this.player.getId(), quiz.getId(), quizAnswers, quizScore);
 			this.quizService.addRecord(record);
 			this.quizService.flush("history");
@@ -283,9 +288,17 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		if (recent.size() == 0) {
 			System.out.println("Sorry, no history to display.");
 		} else {
-			System.out.println("Quiz ID\tPlayer ID\tQuiz Score");
+			System.out.println("Quiz ID\tQuiz Title\tPlayer\tQuiz Score");
 			for (Record r : recent) {
-				System.out.println(r.getQuizID() + "\t" + r.getPlayerId() + "\t" + r.getQuizScore());
+				StringBuilder sb = new StringBuilder();
+				sb.append(r.getQuizID());
+				sb.append("\t");
+				sb.append(this.quizService.getQuizTitleFromId(r.getQuizID()));
+				sb.append("\t");
+				sb.append(this.quizService.getPlayerFromId(r.getQuizID()).getName());
+				sb.append("\t");
+				sb.append(r.getQuizScore());
+				System.out.println(sb.toString());
 			}
 		}
 		
