@@ -10,6 +10,8 @@ To start the server, run the following command from the command line:
 java -Djava.security.policy=server.policy QuizServerLauncher
 ```
 
+There is no current elegant way to quit the server. Instead, to end, hit `Ctrl+c`.
+
 Quiz comes with two clients: QuizSetupClient, for creating quizzes and adding players, and QuizPlayerClient for attempting quizzes and checking scores.
 
 To start QuizSetupClient, run the following command from the command line:
