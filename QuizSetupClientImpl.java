@@ -1,6 +1,7 @@
 // package quiz;
 
 import java.net.MalformedURLException;
+import java.rmi.ConnectException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.Naming;
@@ -24,10 +25,14 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 	}
 	
 	public void launch() throws RemoteException, MalformedURLException, NotBoundException {
-		System.out.print("Connecting to server...");
-		this.connect();
-		System.out.println("connected.");
-		this.switcher();
+		try {
+			System.out.print("Connecting to server...");
+			this.connect();
+			System.out.println("connected.");
+			this.switcher();
+		} catch (ConnectException c) {
+			System.out.println("Server is not running.");
+		}
 	}
 		
 	/**
