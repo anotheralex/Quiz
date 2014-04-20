@@ -176,7 +176,7 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 		}
 		return 0;
 	}
-	
+
 	/**
 	 * Show a list of all players
 	 * @throws RemoteException 
@@ -185,14 +185,20 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 		if (this.quizService.getPlayers().isEmpty()) {
 			System.out.println("No players yet.");
 		} else {
-			System.out.println("\nAll players");
-			System.out.println("ID\tName");
+			System.out.println("\nAll Players\n");
+			System.out.printf("%-9s  %-16s\n",
+					"Player ID",
+					"Player Name"
+					);
+			System.out.printf("%-9s  %-16s\n",
+					"---------",
+					"----------------"
+					);
 			for (Player p : this.quizService.getPlayers()) {
-				StringBuilder sb = new StringBuilder();
-				sb.append(p.getId());
-				sb.append("\t");
-				sb.append(p.getName());
-				System.out.println(sb.toString());
+				System.out.printf("%-9s  %-16s\n",
+						p.getId(),
+						p.getName()
+						);
 			}
 		}
 	}

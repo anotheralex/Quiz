@@ -161,19 +161,11 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 					"---------",
 					"----------------"
 					);
-			//System.out.println("ID\tName");
 			for (Player p : this.quizService.getPlayers()) {
 				System.out.printf("%-9s  %-16s\n",
 						p.getId(),
 						p.getName()
 						);
-				/*
-				StringBuilder sb = new StringBuilder();
-				sb.append(p.getId());
-				sb.append("\t");
-				sb.append(p.getName());
-				System.out.println(sb.toString());
-				*/
 			}
 		}
 	}
