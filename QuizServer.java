@@ -548,5 +548,44 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		return map;
 	}
 
+	/**
+	 * Get the top score and associated players for a quiz identified by ID
+	 * 
+	 * @param id the ID of the quiz
+	 * @return a list of players who got the top score
+	 */
+	public List<Player> getQuizTopPlayers(int id) throws RemoteException {
+		List<Player> topPlayers = new ArrayList<>();
+		int topScore = this.getQuizTopScore(id);
+		
+		for (Record record : this.history) {
+			if (record.getQuizID() == id && record.getQuizScore() == topScore) {
+				topPlayers.add(this.getPlayerFromId(record.getPlayerId()));
+			}
+		}
+		
+		return topPlayers;
+	}
+	
+	/**
+	 * Get the top score for a quiz identified by ID
+	 * 
+	 * Note: during refactoring, it would be a good idea to put the top score for each
+	 * quiz into a Map right when quizzes are completed to avoid having to scan the 
+	 * history each time 
+	 * 
+	 * @param id the ID of the quiz
+	 * @return the top score
+	 */
+	public int getQuizTopScore(int id) throws RemoteException {
+		int topScore = 0;
+		for (Record record : this.history) {
+			if (record.getQuizID() == id && record.getQuizScore() > topScore) {
+				topScore = record.getQuizScore();
+			}
+		}
+		
+		return topScore;
+	}
 
 }

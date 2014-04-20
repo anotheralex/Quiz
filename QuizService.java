@@ -209,5 +209,21 @@ public interface QuizService extends Remote {
 	 * @return the title of the Quiz object with ID
 	 */
 	String getQuizTitleFromId(int id) throws RemoteException;
+	
+	/**
+	 * Get the top score and associated players for a quiz identified by ID
+	 * 
+	 * @param id the ID of the quiz
+	 * @return a list of players who got the top score
+	 */
+	List<Player> getQuizTopPlayers(int id) throws RemoteException;
+	
+	/**
+	 * Get the top score for a quiz identified by ID
+	 * 
+	 * @param id the ID of the quiz
+	 * @return the top score
+	 */
+	int getQuizTopScore(int id) throws RemoteException;
 
 }

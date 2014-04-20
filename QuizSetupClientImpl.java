@@ -229,16 +229,28 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 		System.out.print("\nPlease enter the ID of the quiz you wish to close: ");
 		int quizId = Integer.parseInt(System.console().readLine());
 		
+		int topScore = this.quizService.getQuizTopScore(quizId);
+		List<Player> topPlayers = this.quizService.getQuizTopPlayers(quizId);
+		
 		List<Record> recentHistory = this.quizService.closeQuiz(quizId);
 		
 		if (recentHistory == null) {
 			System.out.println("\nCould not close quiz " + quizId);
+		} else if (recentHistory.size() == 0) {
+			System.out.println("\nQuiz " + quizId + " has not been played.");
 		} else {
 			// TODO add the date
-			System.out.println("Quiz " + quizId + " closed. The most recent plays are summarized below.");
+			System.out.println("\nQuiz " + quizId + " closed.");
+			System.out.println("Top Score: " + topScore);
+			System.out.println("Top Players:");
+			for (Player player : topPlayers) {
+				System.out.println(player.getName());
+			}
+			
+			System.out.println("\nRecent play history.");
 			System.out.println("Player\tScore");
 			for (Record r : recentHistory) {
-				System.out.println(r.getPlayerId() + "\t" + r.getQuizScore());
+				System.out.println(this.quizService.getPlayerFromId(r.getPlayerId()) + "\t" + r.getQuizScore());
 			}
 		}
 		
