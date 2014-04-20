@@ -245,7 +245,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 			Quiz quiz = this.quizService.getQuizFromId(quizId);
 			for (Question question : quiz.getQuestions()) {
 				// print out the text of the question
-				System.out.println(question.getText());
+				System.out.println("\n" + question.getText());
 				
 				// Prompt for a numeric answer to the question and get the ID of that answer
 				answerId = this.getQuizQuestionAnswer(question);
