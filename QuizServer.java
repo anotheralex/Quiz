@@ -82,18 +82,17 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	/**
 	 * Closes a specified quiz
 	 *
-	 * Prints the name of the winner and all player details
-	 *
 	 * @param id the id of the quiz to close
 	 * @return List of recent records for the quoted quiz
+	 * or null if the quiz does not exist
 	 */
 	public synchronized List<Record> closeQuiz(int id) throws RemoteException  {
+		List<Record> closeOutHistory = new ArrayList<>();
 		if (this.quizWithIdExists(id)) {
 			this.getQuizFromId(id).close();
-			return this.getRecentHistory(id);
+			closeOutHistory = this.getRecentHistory(id);
 		}
-		return null;
-		
+		return closeOutHistory;
 	}
 
 	/**
