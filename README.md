@@ -10,8 +10,6 @@ To start the server, run the following command from the command line:
 java -Djava.security.policy=server.policy QuizServerLauncher
 ```
 
-There is no current elegant way to quit the server. Instead, to end, hit `Ctrl+c`.
-
 Quiz comes with two clients: QuizSetupClient, for creating quizzes and adding players, and QuizPlayerClient for attempting quizzes and checking scores.
 
 To start QuizSetupClient, run the following command from the command line:
@@ -25,6 +23,8 @@ java -Djava.security.policy=client.policy QuizPlayerClient
 ```
 
 Once the client is started, follow the onscreen instructions to enter players and enter and play quizzes and see the recent quiz play history.
+
+There is currently no elegant way to quit the server. Instead, to quit, hit `Ctrl+c`. Both clients can be quit from their respective menus.
 
 ### Notes
 Quiz was written and tested under Mac OS X Lion (10.7.5). The code was written in Eclipse (Kepler Service Release 2) with the apps tested in Terminal.app.
