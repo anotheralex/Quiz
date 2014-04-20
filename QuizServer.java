@@ -50,9 +50,11 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 		this.recordId = this.idMap.get("recordId");
 	}
 
-	// TODO Functionality now in addQuiz(Quiz)
+	
 	/**
 	 * Creates a new quiz
+	 * 
+	 * Note: Functionality now in QuizServer.addQuiz(Quiz)
 	 */
 	public synchronized Quiz addQuiz(String title) throws RemoteException {
 		Quiz newQuiz = new QuizImpl(this.quizId, title);
