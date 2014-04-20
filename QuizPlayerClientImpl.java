@@ -289,8 +289,22 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		if (recent.size() == 0) {
 			System.out.println("Sorry, no history to display.");
 		} else {
-			System.out.println("Quiz ID\tQuiz Title\tPlayer\tQuiz Score");
+			//System.out.println("Quiz ID\tQuiz Title\tPlayer\tQuiz Score");
+			System.out.printf("%-7s  %-32s  %-16s  %-10s\n",
+					"Quiz ID",
+					"Quiz Title",
+					"Player Name",
+					"Quiz Score"
+					);
+			System.out.printf("%-7s  %-32s  %-16s  %-10s\n",
+					"-------",
+					"--------------------------------",
+					"----------------",
+					"----------"
+					);
+
 			for (Record r : recent) {
+				/*
 				StringBuilder sb = new StringBuilder();
 				sb.append(r.getQuizID());
 				sb.append("\t");
@@ -300,6 +314,13 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 				sb.append("\t");
 				sb.append(r.getQuizScore());
 				System.out.println(sb.toString());
+				*/
+				System.out.printf("%-7s  %-32s  %-16s  %-10s\n",
+						r.getQuizID(),
+						this.quizService.getQuizTitleFromId(r.getQuizID()),
+						this.quizService.getPlayerFromId(r.getPlayerId()).getName(),
+						r.getQuizScore()
+						);
 			}
 		}
 		

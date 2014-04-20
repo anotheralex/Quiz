@@ -1,5 +1,3 @@
-// package quiz;
-
 import java.net.MalformedURLException;
 import java.rmi.ConnectException;
 import java.rmi.Remote;
@@ -37,8 +35,8 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 			System.out.println("Server is not running.");
 		}
 	}
-		
-	/**
+
+	/*
 	 * Set up a connection to the remote server
 	 *
 	 * @return a handle to the service
