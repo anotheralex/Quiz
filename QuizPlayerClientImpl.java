@@ -283,6 +283,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 	 * Show a list of recent play records
 	 */
 	public void showRecentHistory() throws RemoteException {
+		System.out.println("\nRecent Quiz Plays\n");
 		List<Record> recent = this.quizService.getRecentHistory();
 		
 		if (recent.size() == 0) {
@@ -295,7 +296,7 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 				sb.append("\t");
 				sb.append(this.quizService.getQuizTitleFromId(r.getQuizID()));
 				sb.append("\t");
-				sb.append(this.quizService.getPlayerFromId(r.getQuizID()).getName());
+				sb.append(this.quizService.getPlayerFromId(r.getPlayerId()).getName());
 				sb.append("\t");
 				sb.append(r.getQuizScore());
 				System.out.println(sb.toString());

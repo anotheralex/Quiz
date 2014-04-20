@@ -321,10 +321,8 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	
 	/**
 	 * Create a list of the most recent quiz play records
-	 * List is size 10 (or less if there are fewer than 10 records)
 	 */
 	public List<Record> getRecentHistory() throws RemoteException {
-		//List<Record> recentHistory = new ArrayList<>();
 		if (this.history.size() < 11) {
 			return this.history;
 		} else {
@@ -335,7 +333,6 @@ public class QuizServer extends UnicastRemoteObject implements QuizService {
 	
 	/**
 	 * Create a list of the most recent quiz play records for a specific quiz
-	 * List is size 10 (or less if there are fewer than 10 records)
 	 * 
 	 * @param quizId the ID of the quiz
 	 */
