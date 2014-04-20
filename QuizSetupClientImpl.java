@@ -24,6 +24,9 @@ public class QuizSetupClientImpl implements QuizSetupClient {
 		}
 	}
 	
+	/**
+	 * Connects to the quiz server and then launches the main menu
+	 */
 	public void launch() throws RemoteException, MalformedURLException, NotBoundException {
 		try {
 			System.out.print("Connecting to server...");
