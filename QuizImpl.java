@@ -141,9 +141,12 @@ public class QuizImpl implements Quiz, Serializable {
 	public void close() {
 		if (this.isLive()) {
 			this.isActive = false;
-		} else {
+		} 
+		/*
+		else {
 			System.out.println("Quiz " + id + " is not running.");
 		}
+		*/
 	}
 	
 	/**
