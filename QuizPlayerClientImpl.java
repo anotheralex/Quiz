@@ -241,20 +241,20 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 		 */
 		if (this.quizService.quizWithIdExists(quizId)) {
 			
-			// There is a matching quiz, so get the questions and then loop through them
+			// There is a matching quiz, so get the questions and loop through them
 			Quiz quiz = this.quizService.getQuizFromId(quizId);
 			for (Question question : quiz.getQuestions()) {
 				// print out the text of the question
 				System.out.println(question.getText());
 				
-				// Prompt for a numeric answer to the question
+				// Prompt for a numeric answer to the question and get the ID of that answer
 				answerId = this.getQuizQuestionAnswer(question);
 
 				// get the Answer object that matches the answerId
 				answer = question.getAnswerFromId(answerId);
 				
-				// answers have an score of 0 if wrong or 1 if correct
-				quizScore += answer.getScore();
+				// answers have a score of 0 if wrong or 1 if right
+				quizScore = quizScore + answer.getScore();
 				
 				// add a questionId and the given answerId to the history
 				quizAnswers.put(question.getId(), answerId);
@@ -273,10 +273,10 @@ public class QuizPlayerClientImpl implements QuizPlayerClient {
 
 	/**
 	 * Show the answers for a quiz question
-	 * get a response and generate a score
+	 * get a response and return the ID of the response
 	 * 
 	 * @param question the Question object
-	 * @return the score for the question
+	 * @return the ID of the answer to the question
 	 */
 	public int getQuizQuestionAnswer(Question question) {
 		for (Answer a : question.getAnswers()) {

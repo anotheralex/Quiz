@@ -73,7 +73,7 @@ public class QuestionImpl implements Question, Serializable {
 				promptResponse = System.console().readLine();
 				if (promptResponse.equals("y")) {
 					score = 1;
-				} else if (promptResponse.equals("y")) {
+				} else if (promptResponse.equals("n")) {
 					score = 0;
 				}
 			} while ( !(promptResponse.equals("y") || promptResponse.equals("n")) );
